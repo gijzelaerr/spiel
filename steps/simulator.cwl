@@ -1,20 +1,14 @@
-# meqtree-pipeliner.py  --mt 2 -c data/tdlconf.profiles [sim]
-#    ms_sel.input_column=DATA
-#    ms_sel.field_index=0
-#    ms_sel.msname=results/meerkat_0h10s.MS
-#    me.sky.tiggerskymodel=1
-#    me.use_smearing=0
-#    sim_mode="sim only"
-#    noise_stddev=0.18581724893
-#    ms_sel.ddid_index=0
-#    tiggerlsm.filename=data/nvss1deg.lsm.html
-#    ms_sel.output_column=CORRECTED_DATA
-#    /usr/lib/python2.7/dist-packages/Cattery/Siamese/turbo-sim.py =_simulate_MS
-#
 cwlVersion: v1.0
 class: CommandLineTool
 
 baseCommand: meqtree-pipeliner.py
+
+hints:
+  DockerRequirement:
+      dockerImageId: kernsuite/meqtrees
+      dockerFile: |
+        FROM kernsuite/base:3
+        RUN docker-apt-install meqtrees
 
 requirements:
   - class: InlineJavascriptRequirement

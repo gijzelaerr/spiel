@@ -3,18 +3,17 @@ class: CommandLineTool
 
 baseCommand: simms
 
-#requirements:
-#  - class: InitialWorkDirRequirement
-#    listing:
-#      - entry: $(inputs.script)
-#        writable: true
+requirements:
+    - class: EnvVarRequirement
+      envDef:
+        USER: root
 
-#hints:
-  #DockerRequirement:
-      #dockerImageId: kernsuite/simms
-      #dockerFile: |
-        #FROM kernsuite/base:3
-        #RUN docker-apt-install simms
+hints:
+  DockerRequirement:
+      dockerImageId: kernsuite/simms
+      dockerFile: |
+        FROM kernsuite/base:3
+        RUN docker-apt-install simms
 
 inputs:
   telescope:
