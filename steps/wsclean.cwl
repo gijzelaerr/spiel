@@ -14,13 +14,15 @@ inputs:
   ms:
     type: Directory
     inputBinding:
-      position: 1
+      position: 4
 
-  size:
-    type: string
-    default: 2048 2048
-    inputBinding:
-      prefix: -size
+  size_x:
+    type: int
+    default: 512
+
+  size_y:
+    type: int
+    default: 512
 
   scale:
     type: string
@@ -28,14 +30,22 @@ inputs:
     inputBinding:
       prefix: -scale
 
+arguments:
+ - valueFrom: -size
+   position: 1
+ - valueFrom: $(inputs.size_x)
+   position: 2
+ - valueFrom: $(inputs.size_y)
+   position: 3
+
 outputs:
   dirty:
     type: File
     outputBinding:
       glob: wsclean-dirty.fits
 
-  clean:
+  image:
     type: File
     outputBinding:
-      glob: wsclean-clean.fits
+      glob: wsclean-image.fits
 

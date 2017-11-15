@@ -20,6 +20,12 @@ outputs:
   empty_ms:
     type: Directory
     outputSource: simms/empty_ms
+  dirty:
+    type: File
+    outputSource: wsclean/dirty
+  image:
+    type: File
+    outputSource: wsclean/image
 
 steps:
   galsim:
@@ -57,4 +63,4 @@ steps:
     in:
       ms: simms/empty_ms
     out:
-      [clean, dirty]
+      [image, dirty]
