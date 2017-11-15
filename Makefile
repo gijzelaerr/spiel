@@ -15,6 +15,5 @@ run: .virtualenv/bin/cwltool
 	.virtualenv/bin/cwltool \
 		--cachedir cache \
 		--outdir results \
-		--force-docker-pull \
-		spel.cwl \
+		spiel.cwl \
 		job.cwl

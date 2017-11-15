@@ -22,3 +22,12 @@ dfreq: 1MHz
 
 # Number of channels
 nchan: 1
+
+# simulation properties
+config:
+  class: File
+  path: data/tdlconf.profiles
+
+tigger_filename:
+  class: File
+  path: data/nvss1deg.lsm.html

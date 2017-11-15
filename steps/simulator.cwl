@@ -17,7 +17,11 @@ class: CommandLineTool
 baseCommand: meqtree-pipeliner.py
 
 requirements:
-  InlineJavascriptRequirement: {}
+  - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
+    listing:
+      - entry: $(inputs.ms)
+        writable: true
 
 arguments: ['--mt', '$( runtime.cores )',
     '-c', '$( inputs.config.path )',
@@ -25,9 +29,9 @@ arguments: ['--mt', '$( runtime.cores )',
     'ms_sel.input_column=$( inputs.input_column )',
     'ms_sel.field_index=$( inputs.field_index )',
     'ms_sel.msname=$( inputs.ms.path )',
-    'me.sky.tiggerskymodel=$( inputs.tikkerskymodel )',
+    'me.sky.tiggerskymodel=$( inputs.tiggerskymodel )',
     'me.use_smearing=$( inputs.use_smearing )',
-    'sim_mode="$( inputs.sim_mode )"',
+    'sim_mode=$( inputs.sim_mode )',
     'noise_stddev=$( inputs.noise_stddev )',
     'ms_sel.ddid_index=$( inputs.ddid_index )',
     'tiggerlsm.filename=$( inputs.tigger_filename )',
@@ -55,9 +59,9 @@ inputs:
     type: int?
     default: 0
 
-  tigger_skymodel:
+  tiggerskymodel:
     type: int?
-    default: 0
+    default: 1
 
   use_smearing:
     type: int?
@@ -78,4 +82,8 @@ inputs:
   tigger_filename:
     type: File
   
-outputs: {}
+outputs:
+   ms_sim:
+     type: Directory
+     outputBinding:
+       glob: "*.MS"

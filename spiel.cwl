@@ -10,6 +10,8 @@ inputs:
  freq0: string
  dfreq: string
  nchan: int
+ config: File
+ tigger_filename: File
 
 outputs:
   skymodel:
@@ -39,3 +41,20 @@ steps:
       nchan: nchan
     out:
       [empty_ms]
+
+  simulator:
+    run: steps/simulator.cwl
+    in:
+      ms: simms/empty_ms
+      config: config
+      tigger_filename: tigger_filename
+
+    out:
+      [ms_sim]
+
+  wsclean:
+    run: steps/wsclean.cwl
+    in:
+      ms: simms/empty_ms
+    out:
+      [clean, dirty]
