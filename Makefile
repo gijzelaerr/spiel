@@ -54,3 +54,6 @@ toil: .virtualenv/bin/cwltoil
 		--workDir $(CURDIR)/work \
 		spiel.cwl \
 		job.cwl
+
+docker:
+	docker build -t gijzelaerr/spiel .
