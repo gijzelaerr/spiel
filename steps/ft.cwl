@@ -1,5 +1,4 @@
-# CASA task to insert a source model in a visibility set
-
+doc: CASA task to insert a source model in a visibility set
 cwlVersion: v1.0
 class: CommandLineTool
 

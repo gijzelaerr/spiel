@@ -17,9 +17,6 @@ outputs:
   skymodel:
     type: File
     outputSource: galsim/skymodel
-  empty_ms:
-    type: Directory
-    outputSource: simms/empty_ms
   dirty:
     type: File
     outputSource: wsclean/dirty

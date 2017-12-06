@@ -22,11 +22,11 @@ clean:
 
 run: .virtualenv/bin/cwltool docker
 	.virtualenv/bin/cwltool \
-		--tmpdir `pwd`/tmp \
-		--cachedir cache \
-		--outdir results \
+		--tmpdir `pwd`/tmp/ \
+		--cachedir `pwd`/cache/ \
+		--outdir `pwd`/results/ \
 		spiel.cwl \
-		job.cwl
+		job.yaml
 
 run-udocker: .virtualenv/bin/cwltool
 	.virtualenv/bin/cwltool \
@@ -34,7 +34,7 @@ run-udocker: .virtualenv/bin/cwltool
 		--cachedir cache \
 		--outdir results \
 		spiel.cwl \
-		job.cwl
+		job.yaml
 
 
 nodocker: .virtualenv/bin/cwltool
@@ -43,7 +43,7 @@ nodocker: .virtualenv/bin/cwltool
 		--cachedir cache \
 		--outdir results \
 		spiel.cwl \
-		job.cwl
+		job.yaml
 
 
 toil: .virtualenv/bin/cwltoil docker
@@ -54,7 +54,7 @@ toil: .virtualenv/bin/cwltoil docker
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		spiel.cwl \
-		job.cwl
+		job.yaml
 
 docker:
 	docker build -t gijzelaerr/spiel .
