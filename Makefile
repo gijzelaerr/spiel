@@ -1,4 +1,5 @@
 .PHONY: clean run
+RUN := runs/run_$(shell date +%F-%H-%M-%S)
 
 all: run
 
@@ -45,8 +46,11 @@ nodocker: .virtualenv/bin/cwltool
 
 
 toil: .virtualenv/bin/cwltoil
+	mkdir -p $(RUN)/results
 	.virtualenv/bin/toil-cwl-runner \
-		--outdir $(CURDIR)/results \
-		--jobStore file:///$(CURDIR)/job_store \
+		--logFile $(RUN)/log \
+		--outdir $(RUN)/results \
+		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
+		--workDir $(CURDIR)/work \
 		spiel.cwl \
 		job.cwl
