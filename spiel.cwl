@@ -61,6 +61,6 @@ steps:
   wsclean:
     run: steps/wsclean.cwl
     in:
-      ms: simms/empty_ms
+      ms: simulator/ms_sim
     out:
       [image, dirty]

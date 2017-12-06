@@ -8,8 +8,10 @@ https://github.com/SpheMakh/Stimela/blob/master/examples/simulation_pipeline.py
 # requirements
 
 * virtualenv to bootstrap CWLrunner
+* make if you want to use the helper Makefile 
 * [Docker](https://www.docker.com/) if you want to run containers
-* Ubuntu 16.04 with [KERN-3](http://kernsuite.info) repository enabled if you dont want to use containers
+* Ubuntu 16.04 with [KERN-3](http://kernsuite.info) repository enabled if you
+  dont want to use containers
 
 To run the pipeline with the example dataset just run:
 ```bash

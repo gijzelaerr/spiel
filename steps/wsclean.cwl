@@ -5,10 +5,7 @@ baseCommand: wsclean
 
 hints:
   DockerRequirement:
-      dockerImageId: kernsuite/wsclean
-      dockerFile: |
-        FROM kernsuite/base:3
-        RUN docker-apt-install wsclean
+      dockerImageId: gijzelaerr/spiel
 
 inputs:
   ms:

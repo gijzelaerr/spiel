@@ -1,4 +1,7 @@
 FROM kernsuite/base:3
+
+ENV USER root
+
 RUN docker-apt-install \
     python-future \
     python-yaml \
@@ -8,5 +11,7 @@ RUN docker-apt-install \
     galsim \
     simms \
     meqtrees \
-    wsclean
+    wsclean \
+    casalite
+
 RUN pip --no-cache-dir install cwlref-runner html5lib "toil[cwl]"

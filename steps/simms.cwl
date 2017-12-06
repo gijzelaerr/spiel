@@ -10,10 +10,7 @@ requirements:
 
 hints:
   DockerRequirement:
-      dockerImageId: kernsuite/simms
-      dockerFile: |
-        FROM kernsuite/base:3
-        RUN docker-apt-install simms
+      dockerImageId: gijzelaerr/spiel
 
 inputs:
   telescope:

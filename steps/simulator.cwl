@@ -5,10 +5,7 @@ baseCommand: meqtree-pipeliner.py
 
 hints:
   DockerRequirement:
-      dockerImageId: kernsuite/meqtrees
-      dockerFile: |
-        FROM kernsuite/base:3
-        RUN docker-apt-install meqtrees
+      dockerImageId: gijzelaerr/spiel
 
 requirements:
   - class: InlineJavascriptRequirement

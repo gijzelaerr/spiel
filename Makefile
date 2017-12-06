@@ -20,8 +20,9 @@ clean:
 	chmod u+rx .virtualenv/bin/udocker
 	.virtualenv/bin/udocker install
 
-run: .virtualenv/bin/cwltool
+run: .virtualenv/bin/cwltool docker
 	.virtualenv/bin/cwltool \
+		--tmpdir `pwd`/tmp \
 		--cachedir cache \
 		--outdir results \
 		spiel.cwl \
@@ -45,7 +46,7 @@ nodocker: .virtualenv/bin/cwltool
 		job.cwl
 
 
-toil: .virtualenv/bin/cwltoil
+toil: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
 	.virtualenv/bin/toil-cwl-runner \
 		--logFile $(RUN)/log \
@@ -57,3 +58,4 @@ toil: .virtualenv/bin/cwltoil
 
 docker:
 	docker build -t gijzelaerr/spiel .
+

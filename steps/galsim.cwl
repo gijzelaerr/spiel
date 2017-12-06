@@ -7,14 +7,11 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.script)
-        writable: true
+#        writable: true
 
 hints:
   DockerRequirement:
-      dockerImageId: kernsuite/galsim
-      dockerFile: |
-        FROM kernsuite/base:3
-        RUN docker-apt-install galsim python-future python-yaml python-pyfits
+      dockerImageId: gijzelaerr/spiel
 
 inputs:
   script:
