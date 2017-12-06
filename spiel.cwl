@@ -35,6 +35,13 @@ steps:
     out:
         [skymodel]
 
+  importfits:
+    run: steps/importfits.cwl
+    in:
+      fitsfile: galsim/skymodel
+    out:
+      [casaimage]
+
   simms:
     run: steps/simms.cwl
     in:
@@ -48,10 +55,18 @@ steps:
     out:
       [empty_ms]
 
+  ft:
+    run: steps/ft.cwl
+    in:
+      vis: simms/empty_ms
+      model: importfits/casaimage
+    out:
+      [vis_out]
+
   simulator:
     run: steps/simulator.cwl
     in:
-      ms: simms/empty_ms
+      ms: ft/vis_out
       config: config
       tigger_filename: tigger_filename
 
