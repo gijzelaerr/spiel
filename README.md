@@ -24,7 +24,7 @@ $ make nodocker
 If you want to try out toil run:
 ```bash
 $ make toil
-```o
+```
 
 [![graph](https://raw.githubusercontent.com/gijzelaerr/spiel/master/spiel.png)](https://view.commonwl.org/workflows/github.com/gijzelaerr/spiel/blob/master/spiel.cwl) 
 
