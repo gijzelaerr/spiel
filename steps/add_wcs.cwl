@@ -5,7 +5,7 @@ baseCommand: python
 
 hints:
   DockerRequirement:
-      dockerPull: stimela/astropy:0.3.1
+      dockerImageId: gijzelaerr/spiel
 
 requirements:
   - class: InlineJavascriptRequirement
@@ -18,11 +18,11 @@ arguments:
       true = True
       false = False
 
-      import astropy.io.fits as fitsio
+      from astropy.io.fits import open, update, writeto
       import astropy.wcs as WCS
       import numpy
 
-      with fitsio.open("$( inputs.fitsfile.path )") as hdu:
+      with open("$( inputs.fitsfile.path )") as hdu:
           hdr = hdu[0].header
           if $( inputs.add_stokes_axis ) or $( inputs.add_freq_axis ):
               data = hdu[0].data
@@ -69,8 +69,8 @@ arguments:
                   "CDELT{:d}".format(ndim+1) : 1,
                   "CUNIT{:d}".format(ndim+1) : "Jy/PIXEL",
               })
-          
-      fitsio.writeto("$( inputs.outname )", data=data, header=hdr, overwrite=$( inputs.overwrite ))
+
+      writeto("$(inputs.fitsfile.nameroot)_wcsfix.fits", data=data, header=hdr)
 
 inputs:
   fitsfile:
@@ -104,15 +104,8 @@ inputs:
     type: boolean?
     default: True
 
-  overwrite:
-    type: boolean?
-    default: False
-
-  outname:
-    type: string
-
 outputs:
-  output:
+  fixedwcs:
     type: File
     outputBinding:
-      glob: $(inputs.outname)
+      glob: $(inputs.fitsfile.nameroot)_wcsfix.fits

@@ -12,6 +12,10 @@ inputs:
  nchan: int
  config: File
  tigger_filename: File
+ ra: float
+ dec: float
+ dra: float
+ ddec: float
 
 outputs:
   skymodel:
@@ -32,10 +36,21 @@ steps:
     out:
         [skymodel]
 
+  add_wcs:
+    run: steps/add_wcs.cwl
+    in:
+      fitsfile: galsim/skymodel
+      ra: ra
+      dec: dec
+      dra: dra
+      ddec: ddec
+    out:
+      [fixedwcs]
+
   importfits:
     run: steps/importfits.cwl
     in:
-      fitsfile: galsim/skymodel
+      fitsfile: add_wcs/fixedwcs
     out:
       [casaimage]
 
