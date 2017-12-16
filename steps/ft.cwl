@@ -72,11 +72,11 @@ inputs:
   usescratch:
     type: boolean
     default: false
-    doc:  If True predicted  visibility  is stored in MODEL_DATA column
+    doc:  If True predicted visibility is stored in MODEL_DATA column
 
 
 outputs:
   vis_out:
     type: Directory
     outputBinding:
-      glob: $( inputs.vis.name )
+      glob: $( inputs.vis.basename )
