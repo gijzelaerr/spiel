@@ -13,11 +13,10 @@ hints:
       dockerImageId: gijzelaerr/spiel
 
 arguments:
-  - valueFrom: --ra 
-  - valueFrom: $(inputs.ra)deg
-  - valueFrom: --dec 
-  - valueFrom: $(inputs.dec)deg
-
+  - prefix: --ra
+    valueFrom: $(inputs.ra)deg
+  - prefix: --dec
+    valueFrom: $(inputs.dec)deg
 
 inputs:
   telescope:
