@@ -40,14 +40,14 @@ inputs:
       prefix: -scale
 
 arguments:
- - valueFrom: -size
- - valueFrom: $(inputs.size_x)
- - valueFrom: $(inputs.size_y)
- - valueFrom: -temp-dir
- - valueFrom: /tmp
- - valueFrom: -no-update-model-required
- - valueFrom: -data-column
- - valueFrom: MODEL_DATA
+ - -size
+ - $(inputs.size_x)
+ - $(inputs.size_y)
+ - prefix: -temp-dir
+   valueFrom: $(runtime.tmpdir)
+ - -no-update-model-required
+ - prefix: -data-column
+   valueFrom: MODEL_DATA
 
 outputs:
   dirty:
