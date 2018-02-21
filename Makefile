@@ -21,6 +21,7 @@ run: .virtualenv/bin/cwltool docker
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
 		spiel.cwl \
+		job.yaml
 
 galsim: .virtualenv/bin/cwltool docker
 	.virtualenv/bin/cwltool \
