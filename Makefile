@@ -22,6 +22,14 @@ run: .virtualenv/bin/cwltool docker
 		--outdir `pwd`/results/ \
 		spiel.cwl \
 
+galsim: .virtualenv/bin/cwltool docker
+	.virtualenv/bin/cwltool \
+		--tmpdir `pwd`/tmp/ \
+		--cachedir `pwd`/cache/ \
+		--outdir `pwd`/results/ \
+		steps/galsim.cwl \
+		--script `pwd`/galsim.yaml
+
 toil: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
 	.virtualenv/bin/toil-cwl-runner \
