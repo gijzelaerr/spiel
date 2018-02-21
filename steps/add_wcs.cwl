@@ -35,8 +35,8 @@ arguments:
       hdr.update({
               "CRVAL1"  : ($( inputs.ra ), ""),
               "CRVAL2"  : ($( inputs.dec ), ""),
-              "CDELT1"  : ($( inputs.dra )/3600.0, ""),
-              "CDELT2"  : ($( inputs.ddec )/3600.0, ""),
+              "CDELT1"  : ($( inputs.dra ), ""),
+              "CDELT2"  : ($( inputs.ddec ), ""),
               "CRPIX1"  : (radim/2 , ""),
               "CRPIX2"  : (decdim/2, ""),
               "CUNIT1"  : ("deg",""),

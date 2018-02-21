@@ -4,10 +4,9 @@ class: Workflow
 inputs:
  galsim_script: File
  telescope: string
- direction: string
  synthesis: float
  dtime: int
- freq0: string
+ freq0: float
  dfreq: string
  nchan: int
  config: File
@@ -16,6 +15,11 @@ inputs:
  dec: float
  dra: float
  ddec: float
+ mgain: float
+ niter: int
+ scale: string
+ size_x: int
+ size_y: int
 
 outputs:
   skymodel:
@@ -27,6 +31,13 @@ outputs:
   image:
     type: File
     outputSource: wsclean/image
+  fixed_sky:
+    type: File
+    outputSource: add_wcs/fixedwcs
+  simulated_vis:
+    type: Directory
+    outputSource: ft/vis_out
+    
 
 steps:
   galsim:
@@ -44,6 +55,7 @@ steps:
       dec: dec
       dra: dra
       ddec: ddec
+      freq0: freq0
     out:
       [fixedwcs]
 
@@ -58,7 +70,8 @@ steps:
     run: steps/simms.cwl
     in:
       telescope: telescope
-      direction: direction
+      ra: ra
+      dec: dec
       synthesis: synthesis
       dtime: dtime
       freq0: freq0
@@ -75,19 +88,24 @@ steps:
     out:
       [vis_out]
 
-  simulator:
-    run: steps/simulator.cwl
-    in:
-      ms: ft/vis_out
-      config: config
-      tigger_filename: tigger_filename
-
-    out:
-      [ms_sim]
+#  simulator:
+#    run: steps/simulator.cwl
+#    in:
+#      ms: ft/vis_out
+#      config: config
+#      tigger_filename: tigger_filename
+#
+#    out:
+#      [ms_sim]
 
   wsclean:
     run: steps/wsclean.cwl
     in:
-      ms: simulator/ms_sim
+      size_x: size_x
+      size_y: size_y
+      scale: scale
+      niter: niter
+      mgain: mgain
+      ms: ft/vis_out
     out:
       [image, dirty]

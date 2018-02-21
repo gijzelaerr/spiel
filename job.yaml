@@ -5,9 +5,6 @@ galsim_script:
 # Telescope name
 telescope: meerkat
 
-# Phase tracking centre of observation
-direction: J2000,0deg,-30deg
-
 # Synthesis time of observation
 synthesis: 0.128
 
@@ -15,7 +12,7 @@ synthesis: 0.128
 dtime: 10
 
 # Start frequency of observation
-freq0: 750MHz
+freq0: 750e6
 
 # Channel width
 dfreq: 1MHz
@@ -32,7 +29,14 @@ tigger_filename:
   class: File
   path: data/nvss1deg.lsm.html
 
-dec: 266.363244382
-ra: -29.9529359725
+ra: 266.363244382
+dec: -29.9529359725
 ddec: -0.003333333414
 dra: 0.003333333414
+
+# Imaging params
+size_x: 512
+size_y: 512
+scale: 1asec
+niter: 1000
+mgain: 0.95

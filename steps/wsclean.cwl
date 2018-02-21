@@ -20,6 +20,18 @@ inputs:
   size_y:
     type: int
     default: 512
+ 
+  niter:
+   type: int
+   default: 1000
+   inputBinding:
+     prefix: -niter
+
+  mgain:
+   type: float
+   default: 0.95
+   inputBinding:
+     prefix: -mgain
 
   scale:
     type: string
@@ -29,11 +41,13 @@ inputs:
 
 arguments:
  - valueFrom: -size
-   position: 1
  - valueFrom: $(inputs.size_x)
-   position: 2
  - valueFrom: $(inputs.size_y)
-   position: 3
+ - valueFrom: -temp-dir
+ - valueFrom: /tmp
+ - valueFrom: -no-update-model-required
+ - valueFrom: -data-column
+ - valueFrom: MODEL_DATA
 
 outputs:
   dirty:
