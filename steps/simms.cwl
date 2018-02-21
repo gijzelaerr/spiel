@@ -12,17 +12,26 @@ hints:
   DockerRequirement:
       dockerImageId: gijzelaerr/spiel
 
+arguments:
+  - valueFrom: --ra 
+  - valueFrom: $(inputs.ra)deg
+  - valueFrom: --dec 
+  - valueFrom: $(inputs.dec)deg
+
+
 inputs:
   telescope:
     type: string
     inputBinding:
       prefix: --tel
 
-  direction:
-    type: string
+  ra:
+    type: float
     doc: Phase tracking centre of observation
-    inputBinding:
-      prefix: --direction
+
+  dec:
+    type: float
+    doc: Phase tracking centre of observation
 
   synthesis:
     type: float
@@ -37,7 +46,7 @@ inputs:
       prefix: --dtime
 
   freq0:
-    type: string
+    type: float
     doc: Start frequency of observation
     inputBinding:
       prefix: --freq0
