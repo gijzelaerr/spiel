@@ -24,20 +24,14 @@ eval_variables :
     # pixel_scale = the pixel scale in arcsec.  Used in setting up the WCS.
     # The units for this doesn't have to be arcsec.  It is set by the wcs.units parameter.
     # Remember the first letter indicates what type each variable is.  Here f = float.
-    fpixel_scale : &pixel_scale 0.2
+    fpixel_scale : &pixel_scale 2
 
     # theta = the angle we rotate the pixel coordinates with respect to RA/Dec coordinates.
     # An unusual prefix: a = Angle.
     atheta : &theta 0.17 degrees
 
-    # tel_diam = the telescope diameter in meters.
-    ftel_diam : &tel_diam 4
-
-    # exp_time = the exposure time in seconds.
-    fexp_time : &exp_time 300
-
     # image_size = size in pixels
-    fimage_size : &image_size 2048
+    fimage_size : &image_size 256
 
     # nobjects = number of objects per image
     # corresponds to 8 gal / arcmin^2
