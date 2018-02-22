@@ -18,3 +18,5 @@ RUN docker-apt-install \
 RUN pip --no-cache-dir install cwlref-runner html5lib "toil[cwl]"
 
 RUN docker-apt-install python-astropy
+
+RUN /usr/bin/galsim_download_cosmos -d /data --nolink -s 23.5
