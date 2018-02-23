@@ -71,7 +71,7 @@ inputs:
 
   usescratch:
     type: boolean
-    default: false
+    default: true
     doc:  If True predicted visibility is stored in MODEL_DATA column
 
 
