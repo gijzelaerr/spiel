@@ -44,7 +44,7 @@ arguments:
  - $(inputs.size_x)
  - $(inputs.size_y)
  - prefix: -temp-dir
-   valueFrom: $(runtime.tmpdir)
+   valueFrom: /tmp
  - -no-update-model-required
  - prefix: -data-column
    valueFrom: MODEL_DATA
