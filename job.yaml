@@ -31,12 +31,12 @@ tigger_filename:
 
 ra: 266.363244382
 dec: -29.9529359725
-ddec: -0.003333333414
-dra: 0.003333333414
+ddec: 0.003333333414
+dra: -0.003333333414
 
 # Imaging params
 size_x: 512
 size_y: 512
-scale: 1asec
+scale: 6asec
 niter: 1000
 mgain: 0.95
