@@ -40,3 +40,5 @@ size_y: 512
 scale: 6asec
 niter: 1000
 mgain: 0.95
+
+random_seed: 1

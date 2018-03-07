@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: Workflow
 
 inputs:
- galsim_script: File
+ random_seed: int
  telescope: string
  synthesis: float
  dtime: int
@@ -43,7 +43,7 @@ steps:
   galsim:
     run: steps/galsim.cwl
     in:
-      script: galsim_script
+      random_seed: random_seed
     out:
         [skymodel]
 

@@ -28,8 +28,7 @@ galsim: .virtualenv/bin/cwltool docker
 		--tmpdir `pwd`/tmp/ \
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
-		steps/galsim.cwl \
-		--script `pwd`/galsim.yaml
+		steps/galsim.cwl
 
 toil: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
