@@ -1,6 +1,9 @@
 cwlVersion: v1.0
 class: Workflow
 
+requirements:
+  - SubworkflowFeatureRequirement
+
 inputs:
  random_seeds: int[]
  telescope: string
