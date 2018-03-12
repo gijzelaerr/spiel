@@ -2,7 +2,8 @@ cwlVersion: v1.0
 class: Workflow
 
 requirements:
-  - SubworkflowFeatureRequirement
+  - class: SubworkflowFeatureRequirement
+  - class: ScatterFeatureRequirement
 
 inputs:
  random_seeds: int[]
@@ -33,33 +34,33 @@ outputs:
     outputSource: simulate/image
   fixed_sky:
     type: File[]
-    outputSource: simulate/fixedwcs
+    outputSource: simulate/fixed_sky
 
 steps:
   simulate:
     run: spiel.cwl
-  in:
-    random_seed: random_seeds
-    telescope: telescope
-    synthesis: synthesis
-    dtime: dtime
-    freq0: freq0
-    dfreq: dfreq
-    nchan: nchan
-    config: config
-    tigger_filename: tigger_filename
-    ra: ra
-    dec: dec
-    dra: dra
-    ddec: ddec
-    mgain: mgain
-    niter: niter
-    scale: scale
-    size_x: size_x
-    size_y: size_y
+    in:
+      random_seed: random_seeds
+      telescope: telescope
+      synthesis: synthesis
+      dtime: dtime
+      freq0: freq0
+      dfreq: dfreq
+      nchan: nchan
+      config: config
+      tigger_filename: tigger_filename
+      ra: ra
+      dec: dec
+      dra: dra
+      ddec: ddec
+      mgain: mgain
+      niter: niter
+      scale: scale
+      size_x: size_x
+      size_y: size_y
 
-  scatter: random_seeds
+    scatter: random_seed
 
-  out: [skymodel, dirty, image, fixed_sky, simulated_vis]
+    out: [skymodel, dirty, image, fixed_sky, simulated_vis]
 
     
