@@ -35,9 +35,9 @@ ddec: 0.003333333414
 dra: -0.003333333414
 
 # Imaging params
-size_x: 512
-size_y: 512
-scale: 6asec
+size_x: 256
+size_y: 256
+scale: 12asec
 niter: 1000
 mgain: 0.95
 
