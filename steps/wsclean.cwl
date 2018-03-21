@@ -55,7 +55,7 @@ outputs:
     outputBinding:
       glob: wsclean-dirty.fits
 
-  image:
+  cleaned:
     type: File
     outputBinding:
       glob: wsclean-image.fits

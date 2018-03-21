@@ -22,18 +22,15 @@ inputs:
  size_y: int
 
 outputs:
-  skymodel:
-    type: File
-    outputSource: galsim/skymodel
   dirty:
     type: File
-    outputSource: wsclean/dirty
-  image:
+    outputSource: rename_dirty/renamed
+  cleaned:
     type: File
-    outputSource: wsclean/image
-  fixed_sky:
+    outputSource: rename_cleaned/renamed
+  skymodel:
     type: File
-    outputSource: add_wcs/fixedwcs
+    outputSource: rename_skymodel/renamed
   simulated_vis:
     type: Directory
     outputSource: ft/vis_out
@@ -88,15 +85,15 @@ steps:
     out:
       [vis_out]
 
-#  simulator:
-#    run: steps/simulator.cwl
-#    in:
-#      ms: ft/vis_out
-#      config: config
-#      tigger_filename: tigger_filename
-#
-#    out:
-#      [ms_sim]
+  simulator:
+    run: steps/simulator.cwl
+    in:
+      ms: ft/vis_out
+      config: config
+      tigger_filename: tigger_filename
+
+    out:
+      [ms_sim]
 
   wsclean:
     run: steps/wsclean.cwl
@@ -106,6 +103,31 @@ steps:
       scale: scale
       niter: niter
       mgain: mgain
-      ms: ft/vis_out
+      #ms: ft/vis_out
+      ms: simulator/ms_sim
     out:
-      [image, dirty]
+      [cleaned, dirty]
+
+  rename_skymodel:
+    run: steps/rename.cwl
+    in:
+      file: add_wcs/fixedwcs
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_cleaned:
+    run: steps/rename.cwl
+    in:
+      file: wsclean/cleaned
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_dirty:
+    run: steps/rename.cwl
+    in:
+      file: wsclean/dirty
+      prefix: random_seed
+    out:
+      - renamed

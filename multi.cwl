@@ -31,10 +31,10 @@ outputs:
     outputSource: simulate/dirty
   image:
     type: File[]
-    outputSource: simulate/image
+    outputSource: simulate/cleaned
   fixed_sky:
     type: File[]
-    outputSource: simulate/fixed_sky
+    outputSource: simulate/skymodel
 
 steps:
   simulate:
@@ -61,6 +61,6 @@ steps:
 
     scatter: random_seed
 
-    out: [skymodel, dirty, image, fixed_sky, simulated_vis]
+    out: [skymodel, dirty, cleaned, simulated_vis]
 
     
