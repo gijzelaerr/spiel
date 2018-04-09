@@ -12,7 +12,7 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.ms)
-        entryname: $(inputs.seed)_$(inputs.ms.basename)
+        entryname: $(inputs.skymodel.basename)_$(inputs.ms.basename)
         writable: true
 
 arguments: ['--mt', '$( runtime.cores )',
@@ -20,7 +20,7 @@ arguments: ['--mt', '$( runtime.cores )',
     '[sim]',
     'ms_sel.input_column=$( inputs.input_column )',
     'ms_sel.field_index=$( inputs.field_index )',
-    'ms_sel.msname=$(inputs.ms.dirname)/$(inputs.seed)_$(inputs.ms.basename)',
+    'ms_sel.msname=$(inputs.ms.dirname)/$(inputs.skymodel.basename)_$(inputs.ms.basename)',
     'me.use_smearing=$( inputs.use_smearing )',
     'sim_mode=$( inputs.sim_mode )',
     'noise_stddev=$( inputs.noise_stddev )',
