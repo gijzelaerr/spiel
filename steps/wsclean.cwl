@@ -50,27 +50,29 @@ arguments:
  - $(inputs.size_x)
  - $(inputs.size_y)
  - prefix: -temp-dir
-   valueFrom: /tmp
+   valueFrom: $(runtime.tmdir)
  - -no-update-model-required
+ - prefix: -name
+   valueFrom: $(inputs.ms.basename)
 
 outputs:
   dirty:
     type: File
     outputBinding:
-      glob: wsclean-dirty.fits
+      glob: $(inputs.ms.basename)-dirty.fits
 
   cleaned:
     type: File
     outputBinding:
-      glob: wsclean-image.fits
+      glob: $(inputs.ms.basename)-image.fits
 
   model:
     type: File
     outputBinding:
-      glob: wsclean-model.fits
+      glob: $(inputs.ms.basename)-model.fits
 
   residual:
     type: File
     outputBinding:
-      glob: wsclean-residual.fits
+      glob: $(inputs.ms.basename)-residual.fits
 
