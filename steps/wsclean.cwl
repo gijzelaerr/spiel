@@ -39,6 +39,12 @@ inputs:
     inputBinding:
       prefix: -scale
 
+  column:
+    type: string
+    default: CORRECTED_DATA
+    inputBinding:
+      prefix: -data-column
+
 arguments:
  - -size
  - $(inputs.size_x)
@@ -46,8 +52,6 @@ arguments:
  - prefix: -temp-dir
    valueFrom: /tmp
  - -no-update-model-required
- - prefix: -data-column
-   valueFrom: MODEL_DATA
 
 outputs:
   dirty:
@@ -59,4 +63,14 @@ outputs:
     type: File
     outputBinding:
       glob: wsclean-image.fits
+
+  model:
+    type: File
+    outputBinding:
+      glob: wsclean-model.fits
+
+  residual:
+    type: File
+    outputBinding:
+      glob: wsclean-residual.fits
 

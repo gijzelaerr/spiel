@@ -63,7 +63,7 @@ inputs:
       prefix: --nchan
 
 outputs:
-   empty_ms:
+   ms:
      type: Directory
      outputBinding:
        glob: "*.MS"
