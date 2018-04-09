@@ -50,7 +50,7 @@ arguments:
  - $(inputs.size_x)
  - $(inputs.size_y)
  - prefix: -temp-dir
-   valueFrom: $(runtime.tmpdir)
+   valueFrom: /tmp  # change to $(runtime.tmpdir) once https://github.com/common-workflow-language/cwltool/issues/682 is fixed
  - -no-update-model-required
  - prefix: -name
    valueFrom: $(inputs.ms.basename)
