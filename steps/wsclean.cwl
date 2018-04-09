@@ -50,7 +50,7 @@ arguments:
  - $(inputs.size_x)
  - $(inputs.size_y)
  - prefix: -temp-dir
-   valueFrom: $(runtime.tmdir)
+   valueFrom: $(runtime.tmpdir)
  - -no-update-model-required
  - prefix: -name
    valueFrom: $(inputs.ms.basename)
