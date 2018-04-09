@@ -20,16 +20,14 @@ arguments: ['--mt', '$( runtime.cores )',
     'ms_sel.input_column=$( inputs.input_column )',
     'ms_sel.field_index=$( inputs.field_index )',
     'ms_sel.msname=$( inputs.ms.path )',
-    'me.sky.tiggerskymodel=$( inputs.tiggerskymodel )',
     'me.use_smearing=$( inputs.use_smearing )',
     'sim_mode=$( inputs.sim_mode )',
     'noise_stddev=$( inputs.noise_stddev )',
     'ms_sel.ddid_index=$( inputs.ddid_index )',
-    'tiggerlsm.filename=$( inputs.tigger_filename.path )',
+    'tiggerlsm.filename=$( inputs.skymodel.path )',
     'ms_sel.output_column=$( inputs.output_column )',
     '/usr/lib/python2.7/dist-packages/Cattery/Siamese/turbo-sim.py',
     '=_simulate_MS']
-
 
 inputs:
   ms:
@@ -70,11 +68,11 @@ inputs:
     type: int?
     default: 0
 
-  tigger_filename:
+  skymodel:
     type: File
   
 outputs:
-   ms_sim:
+   ms_out:
      type: Directory
      outputBinding:
        glob: "*.MS"
