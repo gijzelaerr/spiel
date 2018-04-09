@@ -39,7 +39,7 @@ arguments:
       # use a spectral index close to -0.7
       spi = -0.7 + random.randn(nsrc)*.01
 
-      model = open("skymodel.txt", "w")
+      model = open("skymodel_{}.txt".format(seed), "w")
           
       model.write("#format: name ra_d dec_d i freq0 spi\\n")
       for i in xrange(nsrc):
@@ -81,4 +81,4 @@ outputs:
   skymodel:
     type: File
     outputBinding:
-      glob: skymodel.txt
+      glob: skymodel_$(inputs.seed).txt
