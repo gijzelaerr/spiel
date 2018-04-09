@@ -14,16 +14,18 @@ inputs:
  dfreq: string
  nchan: int
  config: File
- tigger_filename: File
  ra: float
  dec: float
- dra: float
- ddec: float
  mgain: float
  niter: int
  scale: string
  size_x: int
  size_y: int
+ column: string
+ fov: float
+ nsrc: int
+ pb_fwhm: float
+
 
 outputs:
   dirty:
@@ -48,19 +50,18 @@ steps:
       dfreq: dfreq
       nchan: nchan
       config: config
-      tigger_filename: tigger_filename
       ra: ra
       dec: dec
-      dra: dra
-      ddec: ddec
       mgain: mgain
       niter: niter
       scale: scale
       size_x: size_x
       size_y: size_y
+      column: column
+      fov: fov
+      nsrc: nsrc
+      pb_fwhm: pb_fwhm
 
     scatter: random_seed
 
     out: [skymodel, dirty, cleaned, simulated_vis]
-
-    
