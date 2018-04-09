@@ -25,23 +25,21 @@ config:
   class: File
   path: data/tdlconf.profiles
 
-tigger_filename:
-  class: File
-  path: data/nvss1deg.lsm.html
-
 ra: 266.363244382
 dec: -29.9529359725
-ddec: 0.003333333414
-dra: -0.003333333414
+nsrc: 100
+fov: 0.5
+pb_fwhm: 0.25
 
 # Imaging params
-size_x: 256
-size_y: 256
-scale: 12asec
+size_x: 1024
+size_y: 1024
+scale: 2asec
 niter: 1000
 mgain: 0.95
+column: DATA
 
 random_seed: 1
 
-random_seeds: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-#random_seeds: [1, 2]
+#random_seeds: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+random_seeds: [1, 2]

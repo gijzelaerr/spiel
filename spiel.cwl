@@ -10,16 +10,17 @@ inputs:
  dfreq: string
  nchan: int
  config: File
- tigger_filename: File
  ra: float
  dec: float
- dra: float
- ddec: float
  mgain: float
  niter: int
  scale: string
  size_x: int
  size_y: int
+ fov: float
+ pb_fwhm: float
+ nsrc: int
+ column: string
 
 outputs:
   dirty:
@@ -28,41 +29,24 @@ outputs:
   cleaned:
     type: File
     outputSource: rename_cleaned/renamed
+  residual:
+    type: File
+    outputSource: rename_residual/renamed
+  model:
+    type: File
+    outputSource: rename_model/renamed
   skymodel:
     type: File
     outputSource: rename_skymodel/renamed
+  fitsmodel:
+    type: File
+    outputSource: rename_fitsmodel/renamed
   simulated_vis:
     type: Directory
-    outputSource: ft/vis_out
+    outputSource: simulator/ms_out
     
 
 steps:
-  galsim:
-    run: steps/galsim.cwl
-    in:
-      random_seed: random_seed
-    out:
-        [skymodel]
-
-  add_wcs:
-    run: steps/add_wcs.cwl
-    in:
-      fitsfile: galsim/skymodel
-      ra: ra
-      dec: dec
-      dra: dra
-      ddec: ddec
-      freq0: freq0
-    out:
-      [fixedwcs]
-
-  importfits:
-    run: steps/importfits.cwl
-    in:
-      fitsfile: add_wcs/fixedwcs
-    out:
-      [casaimage]
-
   simms:
     run: steps/simms.cwl
     in:
@@ -75,25 +59,32 @@ steps:
       dfreq: dfreq
       nchan: nchan
     out:
-      [empty_ms]
+      [ms]
 
-  ft:
-    run: steps/ft.cwl
+  make_skymodel:
+    run: steps/random_sky.cwl
     in:
-      vis: simms/empty_ms
-      model: importfits/casaimage
+      ra: ra
+      dec: dec
+      seed: random_seed
+      freq0: freq0
+      fov: fov
+      pb_fwhm: pb_fwhm
+      nsrc: nsrc
     out:
-      [vis_out]
+      [skymodel]
+
 
   simulator:
     run: steps/simulator.cwl
     in:
-      ms: ft/vis_out
+      ms: simms/ms
       config: config
-      tigger_filename: tigger_filename
+      output_column: column
+      skymodel: make_skymodel/skymodel
 
     out:
-      [ms_sim]
+      [ms_out]
 
   wsclean:
     run: steps/wsclean.cwl
@@ -103,15 +94,23 @@ steps:
       scale: scale
       niter: niter
       mgain: mgain
-      #ms: ft/vis_out
-      ms: simulator/ms_sim
+      column: column
+      ms: simulator/ms_out
     out:
-      [cleaned, dirty]
+      [cleaned, dirty, residual, model]
+
+  tigger_restore:
+    run: steps/tigger_restore.cwl
+    in:
+      image: wsclean/dirty
+      skymodel: make_skymodel/skymodel
+    out:
+      [fitsmodel]
 
   rename_skymodel:
     run: steps/rename.cwl
     in:
-      file: add_wcs/fixedwcs
+      file: make_skymodel/skymodel
       prefix: random_seed
     out:
       - renamed
@@ -128,6 +127,30 @@ steps:
     run: steps/rename.cwl
     in:
       file: wsclean/dirty
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_residual:
+    run: steps/rename.cwl
+    in:
+      file: wsclean/residual
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_model:
+    run: steps/rename.cwl
+    in:
+      file: wsclean/model
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_fitsmodel:
+    run: steps/rename.cwl
+    in:
+      file: tigger_restore/fitsmodel
       prefix: random_seed
     out:
       - renamed

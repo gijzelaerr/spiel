@@ -15,8 +15,8 @@ RUN docker-apt-install \
     wsclean \
     casalite
 
-RUN pip --no-cache-dir install cwlref-runner html5lib "toil[cwl]"
+RUN pip --no-cache-dir install numpy cwlref-runner html5lib "toil[cwl]"
 
 RUN docker-apt-install python-astropy
 
-RUN /usr/bin/galsim_download_cosmos -d /data --nolink -s 23.5
+#RUN /usr/bin/galsim_download_cosmos -d /data --nolink -s 23.5
