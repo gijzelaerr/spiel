@@ -40,7 +40,7 @@ outputs:
     outputSource: make_skymodel/skymodel
   fitsmodel:
     type: File
-    outputSource: trigger_restore/fitsmodel
+    outputSource: tigger_restore/fitsmodel
   simulated_vis:
     type: Directory
     outputSource: simulator/ms_out
