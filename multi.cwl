@@ -31,12 +31,21 @@ outputs:
   dirty:
     type: File[]
     outputSource: simulate/dirty
-  image:
+  cleaned:
     type: File[]
     outputSource: simulate/cleaned
-  fixed_sky:
+  model:
+    type: File[]
+    outputSource: simulate/model
+  residual:
+    type: File[]
+    outputSource: simulate/residual
+  skymodel:
     type: File[]
     outputSource: simulate/skymodel
+  fitsmodel:
+    type: File[]
+    outputSource: simulate/fitsmodel
 
 steps:
   simulate:
@@ -64,4 +73,4 @@ steps:
 
     scatter: random_seed
 
-    out: [skymodel, dirty, cleaned, simulated_vis]
+    out: [skymodel, dirty, cleaned, model, residual, fitsmodel, simulated_vis]

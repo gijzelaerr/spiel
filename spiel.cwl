@@ -37,10 +37,10 @@ outputs:
     outputSource: rename_model/renamed
   skymodel:
     type: File
-    outputSource: make_skymodel/skymodel
+    outputSource: rename_skymodel/renamed
   fitsmodel:
     type: File
-    outputSource: tigger_restore/fitsmodel
+    outputSource: rename_fitsmodel/renamed
   simulated_vis:
     type: Directory
     outputSource: simulator/ms_out
