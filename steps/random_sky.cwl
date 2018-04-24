@@ -25,7 +25,9 @@ arguments:
       pb_fwhm = $( inputs.pb_fwhm )
       freq0 = $( inputs.freq0 )
 
-      fluxes = random.pareto(5, nsrc) / 100 
+      flux_scale = $( inputs.flux_scale )
+
+      fluxes = random.pareto(5, nsrc) * flux_scale
 
       if pb_fwhm:
       # Simulate more sources in the primary beam FWHM
@@ -75,6 +77,10 @@ inputs:
   freq0:
     type: float?
     default: 1.42e9
+
+  flux_scale:
+    type: float?
+    default: 1
 
 
 outputs:
