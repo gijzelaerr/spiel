@@ -62,7 +62,7 @@ inputs:
 
   noise_stddev:
     type: float?
-    default: 0.18581724893
+    default: 0.0018581724893
 
   ddid_index:
     type: int?
