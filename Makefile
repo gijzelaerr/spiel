@@ -20,29 +20,14 @@ run: .virtualenv/bin/cwltool docker
 		--tmpdir `pwd`/tmp/ \
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
-		multi.cwl \
-		job.yaml
-
-galsim: .virtualenv/bin/cwltool docker
-	.virtualenv/bin/cwltool \
-		--tmpdir `pwd`/tmp/ \
-		--cachedir `pwd`/cache/ \
-		--outdir `pwd`/results/ \
-		steps/galsim.cwl
-
-toil: .virtualenv/bin/cwltoil docker
-	mkdir -p $(RUN)/results
-	.virtualenv/bin/toil-cwl-runner \
-		--logFile $(RUN)/log \
-		--outdir $(RUN)/results \
-		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-		--workDir $(CURDIR)/work \
 		spiel.cwl \
 		job.yaml
 
 multi: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
 	.virtualenv/bin/toil-cwl-runner \
+		--stats \
+	    --cleanWorkDir onSuccess \
 		--logFile $(RUN)/log \
 		--outdir $(RUN)/results \
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
