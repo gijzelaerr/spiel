@@ -45,6 +45,12 @@ inputs:
     inputBinding:
       prefix: -data-column
 
+  weight:
+    type: string
+    inputBinding:
+      prefix: -weight
+
+
 arguments:
  - -size
  - $(inputs.size_x)

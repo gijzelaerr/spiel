@@ -21,6 +21,7 @@ inputs:
  pb_fwhm: float
  nsrc: int
  column: string
+ weight: string
 
 outputs:
   dirty:
@@ -95,6 +96,7 @@ steps:
       niter: niter
       mgain: mgain
       column: column
+      weight: weight
       ms: simulator/ms_out
     out:
       [cleaned, dirty, residual, model]

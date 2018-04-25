@@ -25,6 +25,7 @@ inputs:
  fov: float
  nsrc: int
  pb_fwhm: float
+ weight: string
 
 
 outputs:
@@ -70,6 +71,7 @@ steps:
       fov: fov
       nsrc: nsrc
       pb_fwhm: pb_fwhm
+      weight: weight
 
     scatter: random_seed
 
