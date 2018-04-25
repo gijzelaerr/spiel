@@ -26,22 +26,22 @@ inputs:
 outputs:
   dirty:
     type: File
-    outputSource: rename_dirty/renamed
+    outputSource: wsclean/dirty
   cleaned:
     type: File
-    outputSource: rename_cleaned/renamed
+    outputSource: wsclean/cleaned
   residual:
     type: File
-    outputSource: rename_residual/renamed
+    outputSource: wsclean/residual
   model:
     type: File
-    outputSource: rename_model/renamed
+    outputSource: wsclean/model
   skymodel:
     type: File
-    outputSource: rename_skymodel/renamed
+    outputSource: make_skymodel/skymodel
   fitsmodel:
     type: File
-    outputSource: rename_fitsmodel/renamed
+    outputSource: tigger_restore/fitsmodel
   simulated_vis:
     type: Directory
     outputSource: simulator/ms_out
@@ -108,51 +108,3 @@ steps:
       skymodel: make_skymodel/skymodel
     out:
       [fitsmodel]
-
-  rename_skymodel:
-    run: steps/rename.cwl
-    in:
-      file: make_skymodel/skymodel
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_cleaned:
-    run: steps/rename.cwl
-    in:
-      file: wsclean/cleaned
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_dirty:
-    run: steps/rename.cwl
-    in:
-      file: wsclean/dirty
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_residual:
-    run: steps/rename.cwl
-    in:
-      file: wsclean/residual
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_model:
-    run: steps/rename.cwl
-    in:
-      file: wsclean/model
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_fitsmodel:
-    run: steps/rename.cwl
-    in:
-      file: tigger_restore/fitsmodel
-      prefix: random_seed
-    out:
-      - renamed

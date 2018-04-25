@@ -56,27 +56,29 @@ arguments:
  - $(inputs.size_x)
  - $(inputs.size_y)
  - prefix: -temp-dir
-   valueFrom: /tmp
+   valueFrom: /tmp  # change to $(runtime.tmpdir) once https://github.com/common-workflow-language/cwltool/issues/682 is fixed
  - -no-update-model-required
+ - prefix: -name
+   valueFrom: $(inputs.ms.basename)
 
 outputs:
   dirty:
     type: File
     outputBinding:
-      glob: wsclean-dirty.fits
+      glob: $(inputs.ms.basename)-dirty.fits
 
   cleaned:
     type: File
     outputBinding:
-      glob: wsclean-image.fits
+      glob: $(inputs.ms.basename)-image.fits
 
   model:
     type: File
     outputBinding:
-      glob: wsclean-model.fits
+      glob: $(inputs.ms.basename)-model.fits
 
   residual:
     type: File
     outputBinding:
-      glob: wsclean-residual.fits
+      glob: $(inputs.ms.basename)-residual.fits
 
