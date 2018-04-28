@@ -30,19 +30,15 @@ outputs:
 
 expression: |
   ${
-     if (inputs.randomise_pos) {
+    if (inputs.randomise_pos) {
         var max = 0.0;
         var min = -90.0;
         var dec = (Math.random() * (max - min)) + min;
         var ra = inputs.ra_in;
-     } else {
-        var ra =  inputs.ra_in;
+    } else {
+        var ra = inputs.ra_in;
         var dec = inputs.dec_in;
-     };
+    };
 
-     return {
-        "ra": ra,
-        "dec": dec
-     };
-
-  };
+    return { "ra":  ra, "dec": dec };
+  }
