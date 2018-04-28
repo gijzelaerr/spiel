@@ -57,12 +57,21 @@ outputs:
     
 
 steps:
+  randomise_pos_step:
+    run: steps/randomise_pos.cwl
+    in:
+      ra_in: ra
+      dec_in: dec
+      randomise_pos: randomise_pos
+    out:
+       [ra, dec]
+
   simms:
     run: steps/simms.cwl
     in:
       telescope: telescope
-      ra: ra
-      dec: dec
+      ra: randomise_pos_step/ra
+      dec: randomise_pos_step/dec
       synthesis: synthesis
       dtime: dtime
       freq0: freq0
@@ -74,14 +83,14 @@ steps:
   make_skymodel:
     run: steps/random_sky.cwl
     in:
-      ra: ra
-      dec: dec
+      ra: randomise_pos_step/ra
+      dec: randomise_pos_step/dec
       seed: random_seed
       freq0: freq0
       fov: fov
       pb_fwhm: pb_fwhm
       nsrc: nsrc
-      randomise_pos: randomise_pos
+
     out:
       [skymodel]
 

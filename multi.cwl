@@ -26,6 +26,7 @@ inputs:
  nsrc: int
  pb_fwhm: float
  weight: string
+ randomise_pos: boolean
 
 
 outputs:
@@ -47,6 +48,9 @@ outputs:
   fitsmodel:
     type: File[]
     outputSource: simulate/fitsmodel
+  psf:
+    type: File[]
+    outputSource: simulate/psf
 
 steps:
   simulate:
@@ -72,7 +76,8 @@ steps:
       nsrc: nsrc
       pb_fwhm: pb_fwhm
       weight: weight
+      randomise_pos: randomise_pos
 
     scatter: random_seed
 
-    out: [skymodel, dirty, cleaned, model, residual, fitsmodel, simulated_vis]
+    out: [skymodel, dirty, cleaned, model, residual, fitsmodel, simulated_vis, psf]

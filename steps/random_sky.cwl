@@ -28,14 +28,8 @@ arguments:
       pb_fwhm = $( inputs.pb_fwhm )
       freq0 = $( inputs.freq0 )
       flux_scale = $( inputs.flux_scale )
-      randomise_pos = $( inputs.randomise_pos )
 
       random.seed(seed)
-
-      if randomise_pos:
-         # For now we leave RA alone
-         dec = random.uniform(-90, 0)
-         print("* randomly chosen DEC value from range -90 - 0: {}".format(dec))
 
       fluxes = random.pareto(5, nsrc) * flux_scale
 
