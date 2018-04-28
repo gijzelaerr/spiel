@@ -1,6 +1,11 @@
 cwlVersion: v1.0
 class: Workflow
 
+requirements:
+  - class: StepInputExpressionRequirement
+  - class: InlineJavascriptRequirement
+
+
 inputs:
  random_seed: int
  telescope: string
@@ -22,6 +27,7 @@ inputs:
  nsrc: int
  column: string
  weight: string
+ randomise_pos: boolean
 
 outputs:
   dirty:
@@ -42,6 +48,9 @@ outputs:
   fitsmodel:
     type: File
     outputSource: rename_fitsmodel/renamed
+  psf:
+    type: File
+    outputSource: rename_psf/renamed
   simulated_vis:
     type: Directory
     outputSource: simulator/ms_out
@@ -72,6 +81,7 @@ steps:
       fov: fov
       pb_fwhm: pb_fwhm
       nsrc: nsrc
+      randomise_pos: randomise_pos
     out:
       [skymodel]
 
@@ -98,8 +108,10 @@ steps:
       column: column
       weight: weight
       ms: simulator/ms_out
+      make-psf:
+        valueFrom: $(true)
     out:
-      [cleaned, dirty, residual, model]
+      [cleaned, dirty, residual, model, psf]
 
   tigger_restore:
     run: steps/tigger_restore.cwl
@@ -153,6 +165,15 @@ steps:
     run: steps/rename.cwl
     in:
       file: tigger_restore/fitsmodel
+      prefix: random_seed
+    out:
+      - renamed
+
+
+  rename_psf:
+    run: steps/rename.cwl
+    in:
+      file: wsclean/psf
       prefix: random_seed
     out:
       - renamed
