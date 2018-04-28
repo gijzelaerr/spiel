@@ -11,7 +11,7 @@ inputs:
   ms:
     type: Directory
     inputBinding:
-      position: 4
+      position: 1
 
   size_x:
     type: int
@@ -50,6 +50,11 @@ inputs:
     inputBinding:
       prefix: -weight
 
+  make-psf:
+    type: boolean
+    inputBinding:
+      prefix: -make-psf
+
 
 arguments:
  - -size
@@ -80,3 +85,7 @@ outputs:
     outputBinding:
       glob: wsclean-residual.fits
 
+  psf:
+    type: File
+    outputBinding:
+      glob: wsclean-psf.fits
