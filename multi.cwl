@@ -9,9 +9,9 @@ inputs:
  random_seeds: int[]
  telescope: string
  synthesis: float
- dtime: int
+ dtime: float
  freq0: float
- dfreq: string
+ dfreq: float
  nchan: int
  config: File
  ra: float
@@ -27,6 +27,7 @@ inputs:
  pb_fwhm: float
  weight: string
  randomise_pos: boolean
+ sefd: float
 
 
 outputs:
@@ -77,6 +78,9 @@ steps:
       pb_fwhm: pb_fwhm
       weight: weight
       randomise_pos: randomise_pos
+      sefd: sefd
+      time: time
+      dfreq: dfreq
 
     scatter: random_seed
 

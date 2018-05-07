@@ -15,7 +15,7 @@ dtime: 10
 freq0: 750e6
 
 # Channel width
-dfreq: 1MHz
+dfreq: 1e6
 
 # Number of channels
 nchan: 1
@@ -39,6 +39,7 @@ niter: 1000
 mgain: 0.95
 column: DATA
 weight: uniform
+sefd: 420
 
 random_seed: 2
 

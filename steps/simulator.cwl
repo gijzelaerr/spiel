@@ -22,7 +22,7 @@ arguments: ['--mt', '$( runtime.cores )',
     'ms_sel.msname=$( inputs.ms.path )',
     'me.use_smearing=$( inputs.use_smearing )',
     'sim_mode=$( inputs.sim_mode )',
-    'noise_stddev=$( inputs.noise_stddev )',
+    'noise_stddev=$( inputs.sefd /  Math.sqrt( 2 * inputs.dtime * inputs.dfreq ) )',
     'ms_sel.ddid_index=$( inputs.ddid_index )',
     'tiggerlsm.filename=$( inputs.skymodel.path )',
     'ms_sel.output_column=$( inputs.output_column )',
@@ -60,9 +60,15 @@ inputs:
     type: string?
     default: sim only
 
-  noise_stddev:
+  sefd:
     type: float?
-    default: 0.0018581724893
+    default: 420.0
+
+  dtime:
+     type: float
+
+  dfreq:
+      type: float
 
   ddid_index:
     type: int?

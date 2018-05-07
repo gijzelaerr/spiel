@@ -10,9 +10,9 @@ inputs:
  random_seed: int
  telescope: string
  synthesis: float
- dtime: int
+ dtime: float
  freq0: float
- dfreq: string
+ dfreq: float
  nchan: int
  config: File
  ra: float
@@ -28,6 +28,7 @@ inputs:
  column: string
  weight: string
  randomise_pos: boolean
+ sefd: float
 
 outputs:
   dirty:
@@ -57,21 +58,19 @@ outputs:
     
 
 steps:
-  randomise_pos_step:
-    run: steps/randomise_pos.cwl
+  randomize:
+    run: steps/randomize.cwl
     in:
-      ra_in: ra
-      dec_in: dec
-      randomise_pos: randomise_pos
+       random_seed: random_seed
     out:
-       [ra, dec]
+       [dec]
 
   simms:
     run: steps/simms.cwl
     in:
       telescope: telescope
-      ra: randomise_pos_step/ra
-      dec: randomise_pos_step/dec
+      ra: ra
+      dec: randomize/dec
       synthesis: synthesis
       dtime: dtime
       freq0: freq0
@@ -83,8 +82,8 @@ steps:
   make_skymodel:
     run: steps/random_sky.cwl
     in:
-      ra: randomise_pos_step/ra
-      dec: randomise_pos_step/dec
+      ra: ra
+      dec: randomize/dec
       seed: random_seed
       freq0: freq0
       fov: fov
@@ -102,6 +101,9 @@ steps:
       config: config
       output_column: column
       skymodel: make_skymodel/skymodel
+      sefd: sefd
+      dtime: dtime
+      dfreq: dfreq
 
     out:
       [ms_out]

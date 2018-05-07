@@ -15,7 +15,7 @@ arguments:
   - prefix: -c
     valueFrom: |
 
-      import numpy.random as random
+      from numpy import random
 
       true = True  # javascript booleans are all lowercase
       false = False

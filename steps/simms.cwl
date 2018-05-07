@@ -39,7 +39,7 @@ inputs:
       prefix: --synthesis-time
 
   dtime:
-    type: int
+    type: float
     doc: Integration time
     inputBinding:
       prefix: --dtime
@@ -51,7 +51,7 @@ inputs:
       prefix: --freq0
 
   dfreq:
-    type: string
+    type: float
     doc: Channel width
     inputBinding:
       prefix: --dfreq
