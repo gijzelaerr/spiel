@@ -22,7 +22,7 @@ arguments: ['--mt', '$( runtime.cores )',
     'ms_sel.msname=$( inputs.ms.path )',
     'me.use_smearing=$( inputs.use_smearing )',
     'sim_mode=$( inputs.sim_mode )',
-    'noise_stddev=$( inputs.sefd /  Math.sqrt( 2 * inputs.dtime * inputs.dfreq ) )',
+    'noise_stddev=$( (inputs.sefd /  Math.sqrt( 2 * inputs.dtime * inputs.dfreq )) * inputs.flux_scale )',
     'ms_sel.ddid_index=$( inputs.ddid_index )',
     'tiggerlsm.filename=$( inputs.skymodel.path )',
     'ms_sel.output_column=$( inputs.output_column )',
@@ -76,6 +76,10 @@ inputs:
 
   skymodel:
     type: File
+
+  flux_scale:
+    type: float?
+    default: 1
   
 outputs:
    ms_out:

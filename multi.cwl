@@ -79,7 +79,7 @@ steps:
       weight: weight
       randomise_pos: randomise_pos
       sefd: sefd
-      time: time
+      dtime: dtime
       dfreq: dfreq
 
     scatter: random_seed

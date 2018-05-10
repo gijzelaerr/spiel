@@ -63,7 +63,7 @@ steps:
     in:
        random_seed: random_seed
     out:
-       [dec]
+       [dec, flux_scale, nsrc]
 
   simms:
     run: steps/simms.cwl
@@ -87,6 +87,8 @@ steps:
       seed: random_seed
       freq0: freq0
       fov: fov
+      flux_scale: randomize/flux_scale
+      nsrc: randomize/nsrc
       pb_fwhm: pb_fwhm
       nsrc: nsrc
 
@@ -102,6 +104,7 @@ steps:
       output_column: column
       skymodel: make_skymodel/skymodel
       sefd: sefd
+      flux_scale: randomize/flux_scale
       dtime: dtime
       dfreq: dfreq
 
