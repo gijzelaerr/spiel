@@ -10,7 +10,7 @@ requirements:
 
 hints:
   DockerRequirement:
-      dockerImageId: gijzelaerr/spiel
+      dockerPull: gijzelaerr/spiel
 
 arguments:
   - prefix: --ra

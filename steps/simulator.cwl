@@ -5,7 +5,7 @@ baseCommand: meqtree-pipeliner.py
 
 hints:
   DockerRequirement:
-      dockerImageId: gijzelaerr/spiel
+      dockerPull: gijzelaerr/spiel
 
 requirements:
   - class: InlineJavascriptRequirement

@@ -5,7 +5,7 @@ baseCommand: python
 
 hints:
   DockerRequirement:
-      dockerImageId: gijzelaerr/spiel
+      dockerPull: gijzelaerr/spiel
 
 
 requirements:

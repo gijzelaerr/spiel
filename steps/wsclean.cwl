@@ -5,7 +5,7 @@ baseCommand: wsclean
 
 hints:
   DockerRequirement:
-      dockerImageId: gijzelaerr/spiel
+      dockerPull: gijzelaerr/spiel
 
 inputs:
   ms:

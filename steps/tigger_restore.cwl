@@ -5,7 +5,7 @@ baseCommand: tigger-restore
 
 hints:
   DockerRequirement:
-      dockerImageId: gijzelaerr/spiel
+      dockerPull: gijzelaerr/spiel
 
 inputs:
   image:
