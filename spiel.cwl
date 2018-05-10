@@ -63,7 +63,7 @@ steps:
     in:
        random_seed: random_seed
     out:
-       [dec, flux_scale]
+       [dec, flux_scale, nsrc]
 
   simms:
     run: steps/simms.cwl
@@ -88,6 +88,7 @@ steps:
       freq0: freq0
       fov: fov
       flux_scale: randomize/flux_scale
+      nsrc: randomize/nsrc
       pb_fwhm: pb_fwhm
       nsrc: nsrc
 
