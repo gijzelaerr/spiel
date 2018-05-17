@@ -9,6 +9,10 @@ clean:
 .virtualenv/:
 	virtualenv -p python2 .virtualenv
  
+.virtualenv-system/:
+	virtualenv --system-site-packages -p python2 .virtualenv-system
+	.virtualenv-system/bin/pip install -r requirements.txt
+ 
 .virtualenv/bin/cwltool: .virtualenv/
 	.virtualenv/bin/pip install -r requirements.txt
 
@@ -37,6 +41,15 @@ multi: .virtualenv/bin/cwltoil docker
 		--workDir $(CURDIR)/work \
 		multi.cwl \
 		job.yaml
+
+mesos: .virtualenv-system/bin/cwltoil docker
+	mkdir -p $(RUN)/results
+	.virtualenv/bin/toil-cwl-runner \
+		--batchSystem mesos \
+		--mesosMaster stem6.sdp.kat.ac.za:5050 \
+		multi.cwl \
+		job.yaml
+
 
 srun: .virtualenv/bin/cwltool
 	.virtualenv/bin/cwltool \
