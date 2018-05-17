@@ -6,3 +6,4 @@ job_store/
 runs/
 work/
 tmp/
+*.simg
