@@ -1,7 +1,3 @@
-galsim_script:
-  class: File
-  path: galsim.yaml
-
 # Telescope name
 telescope: kat-7
 
@@ -23,7 +19,7 @@ nchan: 1
 # simulation properties
 config:
   class: File
-  path: data/tdlconf.profiles
+  path: ../data/tdlconf.profiles
 ra: 266.363244382
 dec: -29.9529359725
 nsrc: 100

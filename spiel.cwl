@@ -82,7 +82,7 @@ steps:
       [ms]
 
   make_skymodel:
-    run: steps/random_sky.cwl
+    run: steps/skymodel.cwl
     in:
       ra: ra
       dec: randomize/dec

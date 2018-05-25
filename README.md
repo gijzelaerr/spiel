@@ -13,20 +13,17 @@ https://github.com/SpheMakh/Stimela/blob/master/examples/simulation_pipeline.py
 * Ubuntu 16.04 with [KERN-3](http://kernsuite.info) repository enabled if you
   dont want to use containers
 
+Example the Makefile, it is an example on how to run our pipeline.
+
 To run the pipeline with the example dataset just run:
 ```bash
 $ make
 ```
 
-If you don't use docker but want to run everything outside the container:
-```bash
-$ make nodocker
-```
-
 If you want to try out toil run:
 ```bash
-$ make toil
+$ make multi
 ```
 
-[![graph](https://raw.githubusercontent.com/gijzelaerr/spiel/master/spiel.png)](https://view.commonwl.org/workflows/github.com/gijzelaerr/spiel/blob/master/spiel.cwl) 
+[![spiel graph](https://github.com/gijzelaerr/spiel/blob/master/spiel.png?raw=true "spiel graph")
 
