@@ -28,6 +28,8 @@ inputs:
  weight: string
  randomise_pos: boolean
  sefd: float
+ auto_mask: float
+ auto_threshold: float
 
 
 outputs:
@@ -81,6 +83,8 @@ steps:
       sefd: sefd
       dtime: dtime
       dfreq: dfreq
+      auto_mask: auto_mask
+      auto_threshold: auto_threshold
 
     scatter: random_seed
 

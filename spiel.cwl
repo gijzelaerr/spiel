@@ -29,6 +29,8 @@ inputs:
  weight: string
  randomise_pos: boolean
  sefd: float
+ auto_mask: float
+ auto_threshold: float
 
 outputs:
   dirty:
@@ -124,6 +126,8 @@ steps:
       ms: simulator/ms_out
       make-psf:
         valueFrom: $(true)
+      auto_mask: auto_mask
+      auto_threshold: auto_threshold
     out:
       [cleaned, dirty, residual, model, psf]
 

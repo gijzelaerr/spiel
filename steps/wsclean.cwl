@@ -50,6 +50,18 @@ inputs:
     inputBinding:
       prefix: -weight
 
+  auto_mask:
+    type: float
+    default: 10
+    inputBinding:
+      prefix: -auto-mask
+
+  auto_threshold:
+    type: float
+    default: 0.5
+    inputBinding:
+      prefix: -auto-threshold
+
   make-psf:
     type: boolean
     inputBinding:

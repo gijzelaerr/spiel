@@ -27,8 +27,8 @@ run: .virtualenv/bin/cwltool docker
 		--tmpdir `pwd`/tmp/ \
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
-		spiel.cwl \
-		job.yaml
+		multi.cwl \
+		jobs/kat7.yaml
 
 multi: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -40,7 +40,7 @@ multi: .virtualenv/bin/cwltoil docker
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		job.yaml
+		jobs/kat7.yaml
 
 mesos: .virtualenv-system/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -48,17 +48,18 @@ mesos: .virtualenv-system/bin/cwltoil docker
 		--batchSystem mesos \
 		--mesosMaster stem6.sdp.kat.ac.za:5050 \
 		multi.cwl \
-		job.yaml
+		jobs/kat7.yaml
 
 
 srun: .virtualenv/bin/cwltool
 	.virtualenv/bin/cwltool \
+		--debug \
         --singularity \
 		--tmpdir `pwd`/tmp/ \
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
 		spiel.cwl \
-		job.yaml
+		jobs/kat7.yaml
 
 smulti: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
@@ -71,4 +72,4 @@ smulti: .virtualenv/bin/cwltoil
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		job.yaml
+		jobs/kat7.yaml
