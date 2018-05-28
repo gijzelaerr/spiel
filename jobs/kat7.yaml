@@ -1,8 +1,12 @@
 # Telescope name
 telescope: kat-7
 
+# number of antennas, 7 for KAT-7, typically 64 for Meerkat
+nant: 7
+
 # Synthesis time of observation
-synthesis: 4
+synthesis_min: 2  # hours
+synthesis_max: 12
 
 # Integration time in seconds
 dtime: 10
@@ -11,7 +15,8 @@ dtime: 10
 freq0: 750e6
 
 # Channel width
-dfreq: 1e6
+dfreq_min: 10e6
+dfreq_max: 500e6
 
 # Number of channels
 nchan: 1
@@ -28,9 +33,12 @@ pb_fwhm: 2  # number of sources in the primary beam
 randomise_pos: true
 
 # Imaging params
-size_x: 512
-size_y: 512
-scale: 30asec
+#size_x: 512
+#size_y: 512
+#scale: 30asec
+size_x: 256
+size_y: 256
+scale: 50asec
 niter: 1000
 mgain: 0.90
 column: DATA

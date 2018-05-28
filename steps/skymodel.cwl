@@ -29,9 +29,11 @@ arguments:
       freq0 = $( inputs.freq0 )
       flux_scale = $( inputs.flux_scale )
 
+      noise = $( inputs.sefd / Math.sqrt( 2 * inputs.dtime * inputs.dfreq * (inputs.nant * (inputs.nant-1))/2) )
+
       random.seed(seed)
 
-      fluxes = random.pareto(5, nsrc) * flux_scale
+      fluxes = random.pareto(5, nsrc) + noise/10
 
       if pb_fwhm:
       # Simulate more sources in the primary beam FWHM
@@ -90,6 +92,17 @@ inputs:
     type: boolean?
     default: false
 
+  sefd:
+    type: float
+
+  dtime:
+    type: float
+
+  dfreq:
+      type: float
+
+  nant:
+    type: int
 
 outputs:
   skymodel:

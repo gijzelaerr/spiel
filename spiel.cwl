@@ -9,10 +9,8 @@ requirements:
 inputs:
  random_seed: int
  telescope: string
- synthesis: float
  dtime: float
  freq0: float
- dfreq: float
  nchan: int
  config: File
  ra: float
@@ -31,6 +29,12 @@ inputs:
  sefd: float
  auto_mask: float
  auto_threshold: float
+ nant: int
+ synthesis_min: float
+ synthesis_max: float
+ dfreq_min: float
+ dfreq_max: float
+
 
 outputs:
   dirty:
@@ -57,6 +61,9 @@ outputs:
   simulated_vis:
     type: Directory
     outputSource: simulator/ms_out
+  settings:
+    type: File
+    outputSource: rename_settings/renamed
     
 
 steps:
@@ -64,8 +71,12 @@ steps:
     run: steps/randomize.cwl
     in:
        random_seed: random_seed
+       dfreq_max: dfreq_max
+       dfreq_min: dfreq_min
+       synthesis_max: synthesis_max
+       synthesis_min: synthesis_min
     out:
-       [dec, flux_scale, nsrc]
+       [dec, synthesis, dfreq]
 
   simms:
     run: steps/simms.cwl
@@ -73,10 +84,10 @@ steps:
       telescope: telescope
       ra: ra
       dec: randomize/dec
-      synthesis: synthesis
+      synthesis: randomize/synthesis
       dtime: dtime
       freq0: freq0
-      dfreq: dfreq
+      dfreq: randomize/dfreq
       nchan: nchan
     out:
       [ms]
@@ -89,13 +100,35 @@ steps:
       seed: random_seed
       freq0: freq0
       fov: fov
-      flux_scale: randomize/flux_scale
-      nsrc: randomize/nsrc
       pb_fwhm: pb_fwhm
       nsrc: nsrc
+      sefd: sefd
+      dtime: dtime
+      dfreq: randomize/dfreq
+      nant: nant
 
     out:
       [skymodel]
+
+
+  write_settings:
+    run: steps/write_settings.cwl
+    in:
+      ra: ra
+      dec: randomize/dec
+      seed: random_seed
+      freq0: freq0
+      fov: fov
+      pb_fwhm: pb_fwhm
+      telescope: telescope
+      dfreq: randomize/dfreq
+      synthesis: randomize/synthesis
+      nant: nant
+      randomise_pos: randomise_pos
+
+
+    out:
+      [settings]
 
 
   simulator:
@@ -106,9 +139,8 @@ steps:
       output_column: column
       skymodel: make_skymodel/skymodel
       sefd: sefd
-      flux_scale: randomize/flux_scale
       dtime: dtime
-      dfreq: dfreq
+      dfreq: randomize/dfreq
 
     out:
       [ms_out]
@@ -192,6 +224,15 @@ steps:
     run: steps/rename.cwl
     in:
       file: wsclean/psf
+      prefix: random_seed
+    out:
+      - renamed
+
+
+  rename_settings:
+    run: steps/rename.cwl
+    in:
+      file: write_settings/settings
       prefix: random_seed
     out:
       - renamed
