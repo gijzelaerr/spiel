@@ -64,7 +64,10 @@ outputs:
   settings:
     type: File
     outputSource: rename_settings/renamed
-    
+  bigpsf:
+    type: File
+    outputSource: rename_bigpsf/renamed
+
 
 steps:
   randomize:
@@ -163,6 +166,16 @@ steps:
     out:
       [cleaned, dirty, residual, model, psf]
 
+  make_bigpsf:
+    run: steps/bigpsf.cwl
+    in:
+      size_x: size_x
+      size_y: size_y
+      scale: scale
+      ms: simulator/ms_out
+    out:
+      [bigpsf]
+
   tigger_restore:
     run: steps/tigger_restore.cwl
     in:
@@ -224,6 +237,14 @@ steps:
     run: steps/rename.cwl
     in:
       file: wsclean/psf
+      prefix: random_seed
+    out:
+      - renamed
+
+  rename_bigpsf:
+    run: steps/rename.cwl
+    in:
+      file: make_bigpsf/bigpsf
       prefix: random_seed
     out:
       - renamed

@@ -27,7 +27,7 @@ run: .virtualenv/bin/cwltool docker
 		--tmpdir `pwd`/tmp/ \
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
-		multi.cwl \
+		spiel.cwl \
 		jobs/kat7.yaml
 
 multi: .virtualenv/bin/cwltoil docker
