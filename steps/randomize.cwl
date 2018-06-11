@@ -1,6 +1,11 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+hints:
+  DockerRequirement:
+    dockerImageId: gijzelaerr/spiel
+                                                       
+
 inputs:
   random_seed:
     type: int?
