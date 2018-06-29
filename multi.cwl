@@ -33,6 +33,12 @@ inputs:
  synthesis_max: float
  dfreq_min: float
  dfreq_max: float
+ gain_errors: int 
+ gainamp_min_error: float 
+ gainamp_max_error: float 
+ gainphase_min_error: float 
+ gainphase_max_error: float 
+
 
 outputs:
   dirty:
@@ -95,6 +101,12 @@ steps:
       synthesis_max: synthesis_max
       dfreq_min: dfreq_min
       dfreq_max: dfreq_max
+      gain_errors: gain_errors
+      gainamp_min_error: gainamp_min_error
+      gainamp_max_error: gainamp_max_error
+      gainphase_min_error: gainphase_min_error
+      gainphase_max_error: gainphase_max_error
+
 
     scatter: random_seed
 

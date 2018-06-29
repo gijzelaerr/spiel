@@ -31,7 +31,11 @@ nsrc: 100
 fov: 4
 pb_fwhm: 2  # number of sources in the primary beam
 randomise_pos: true
-
+gain_errors: 1 # 1|0
+gainamp_min_error: 0.8 # no gain error is 1.0
+gainamp_max_error: 1.8 # no gain error is 1.0
+gainphase_min_error: 5 # in degrees
+gainphase_max_error: 30 # in degrees
 # Imaging params
 #size_x: 512
 #size_y: 512
