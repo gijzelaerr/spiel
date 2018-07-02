@@ -31,6 +31,12 @@ inputs:
   dfreq_max:
      type: float
 
+  flux_scale_min:
+     type: float
+
+  flux_scale_max:
+     type: float
+
 
 baseCommand: python
 
@@ -48,10 +54,13 @@ arguments:
       synthesis = random.uniform($(inputs.synthesis_min), $(inputs.synthesis_max))
       dfreq = int(random.uniform($(inputs.dfreq_min), $(inputs.dfreq_max)))
 
+      flux_scale = 10**random.uniform($(inputs.flux_scale_min), $(inputs.flux_scale_max))
+
       print(json.dumps({
         'dec': dec,
         'synthesis': synthesis,
         'dfreq': dfreq,
+        'flux_scale': flux_scale
       }))
 
 stdout: cwl.output.json
@@ -64,4 +73,7 @@ outputs:
     type: float
 
   dfreq:
+    type: float
+
+  flux_scale:
     type: float

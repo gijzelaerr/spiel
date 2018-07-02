@@ -33,7 +33,7 @@ arguments:
 
       random.seed(seed)
 
-      fluxes = random.pareto(5, nsrc) + noise/10
+      fluxes = (random.pareto(5, nsrc) * flux_scale) + noise/10
 
       if pb_fwhm:
       # Simulate more sources in the primary beam FWHM

@@ -38,7 +38,8 @@ inputs:
  gainamp_max_error: float 
  gainphase_min_error: float 
  gainphase_max_error: float 
-
+ flux_scale_min: float
+ flux_scale_max: float
 
 outputs:
   dirty:
@@ -106,7 +107,8 @@ steps:
       gainamp_max_error: gainamp_max_error
       gainphase_min_error: gainphase_min_error
       gainphase_max_error: gainphase_max_error
-
+      flux_scale_min: flux_scale_min
+      flux_scale_max: flux_scale_max
 
     scatter: random_seed
 

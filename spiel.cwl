@@ -39,7 +39,8 @@ inputs:
  gainamp_max_error: float 
  gainphase_min_error: float 
  gainphase_max_error: float 
-
+ flux_scale_min: float
+ flux_scale_max: float
 
 outputs:
   dirty:
@@ -83,8 +84,10 @@ steps:
        dfreq_min: dfreq_min
        synthesis_max: synthesis_max
        synthesis_min: synthesis_min
+       flux_scale_min: flux_scale_min
+       flux_scale_max: flux_scale_max
     out:
-       [dec, synthesis, dfreq]
+       [dec, synthesis, dfreq, flux_scale]
 
   simms:
     run: steps/simms.cwl
@@ -114,6 +117,7 @@ steps:
       dtime: dtime
       dfreq: randomize/dfreq
       nant: nant
+      flux_scale: randomize/flux_scale
 
     out:
       [skymodel]
