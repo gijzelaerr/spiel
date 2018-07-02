@@ -34,6 +34,11 @@ inputs:
  synthesis_max: float
  dfreq_min: float
  dfreq_max: float
+ gain_errors: int
+ gainamp_min_error: float 
+ gainamp_max_error: float 
+ gainphase_min_error: float 
+ gainphase_max_error: float 
 
 
 outputs:
@@ -144,6 +149,11 @@ steps:
       sefd: sefd
       dtime: dtime
       dfreq: randomize/dfreq
+      gain_errors: gain_errors
+      gainamp_min_error: gainamp_min_error
+      gainamp_max_error: gainamp_max_error
+      gainphase_min_error: gainphase_min_error
+      gainphase_max_error: gainphase_max_error
 
     out:
       [ms_out]

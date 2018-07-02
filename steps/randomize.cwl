@@ -3,7 +3,7 @@ class: CommandLineTool
 
 hints:
   DockerRequirement:
-    dockerImageId: gijzelaerr/spiel
+    dockerPull: gijzelaerr/spiel
                                                        
 
 inputs:

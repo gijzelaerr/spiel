@@ -12,7 +12,7 @@ synthesis_max: 12
 dtime: 10
 
 # Start frequency of observation
-freq0: 750e6
+freq0: 1400e6
 
 # Channel width
 dfreq_min: 10e6
@@ -28,10 +28,14 @@ config:
 ra: 266.363244382
 dec: -29.9529359725
 nsrc: 100
-fov: 4
-pb_fwhm: 2  # number of sources in the primary beam
+fov: 2
+pb_fwhm: 1  # number of sources in the primary beam
 randomise_pos: true
-
+gain_errors: 1 # 1|0
+gainamp_min_error: 0.8 # no gain error is 1.0
+gainamp_max_error: 1.8 # no gain error is 1.0
+gainphase_min_error: 5 # in degrees
+gainphase_max_error: 30 # in degrees
 # Imaging params
 #size_x: 512
 #size_y: 512
@@ -39,13 +43,13 @@ randomise_pos: true
 size_x: 256
 size_y: 256
 scale: 50asec
-niter: 1000
-mgain: 0.90
+niter: 100000000
+mgain: 0.80
 column: DATA
 weight: uniform
-sefd: 420
+sefd: 4000
 auto_mask: 5
-auto_threshold: 0.5
+auto_threshold: 0.125
 
 random_seed: 2
 

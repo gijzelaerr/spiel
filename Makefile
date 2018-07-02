@@ -50,6 +50,15 @@ mesos: .virtualenv-system/bin/cwltoil docker
 		multi.cwl \
 		jobs/kat7.yaml
 
+slurm: .virtualenv/bin/cwltoil
+	mkdir -p $(RUN)/results
+	.virtualenv/bin/toil-cwl-runner \
+		--batchSystem slurm \
+		--mesosMaster slurm.idia.ac.za \
+        --singularity \
+		multi.cwl \
+		jobs/kat7.yaml
+
 
 srun: .virtualenv/bin/cwltool
 	.virtualenv/bin/cwltool \
