@@ -62,6 +62,19 @@ inputs:
     inputBinding:
       prefix: --nchan
 
+  pos:
+    type: Directory?
+    doc: Antenna table
+    inputBinding:
+      valueFrom: $(self.path)
+
+  type:
+    type: string
+    doc: Antenna table type
+    inputBinding:
+      prefix: --type
+
+
 outputs:
    ms:
      type: Directory
