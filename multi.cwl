@@ -8,6 +8,7 @@ requirements:
 inputs:
  random_seeds: int[]
  telescope: string
+ antennas: Directory 
  dtime: float
  freq0: float
  nchan: int
@@ -76,6 +77,7 @@ steps:
     in:
       random_seed: random_seeds
       telescope: telescope
+      antennas: antennas
       dtime: dtime
       freq0: freq0
       nchan: nchan

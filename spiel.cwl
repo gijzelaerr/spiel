@@ -41,6 +41,7 @@ inputs:
  gainphase_max_error: float 
  flux_scale_min: float
  flux_scale_max: float
+ antennas: Directory
 
 outputs:
   dirty:
@@ -100,6 +101,10 @@ steps:
       freq0: freq0
       dfreq: randomize/dfreq
       nchan: nchan
+      pos: antennas
+      type:
+        valueFrom: casa
+
     out:
       [ms]
 

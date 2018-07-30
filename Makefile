@@ -40,7 +40,7 @@ multi: .virtualenv/bin/cwltoil docker
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		jobs/kat7.yaml
+		jobs/meerkat16.yaml
 
 mesos: .virtualenv-system/bin/cwltoil docker
 	mkdir -p $(RUN)/results

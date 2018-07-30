@@ -1,3 +1,2 @@
-cwlref-runner
 toil[all]
 
