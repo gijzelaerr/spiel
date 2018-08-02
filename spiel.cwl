@@ -100,6 +100,8 @@ steps:
       freq0: freq0
       dfreq: randomize/dfreq
       nchan: nchan
+      type:
+        valueFrom: casa
     out:
       [ms]
 
