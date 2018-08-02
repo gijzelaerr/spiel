@@ -40,7 +40,7 @@ multi: .virtualenv/bin/cwltoil docker
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		jobs/kat7.yaml
+		jobs/meerkat16.yaml
 
 mesos: .virtualenv-system/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -82,12 +82,3 @@ smulti: .virtualenv/bin/cwltoil
 		--workDir $(CURDIR)/work \
 		multi.cwl \
 		jobs/kat7.yaml
-
-meerkat16: .virtualenv/bin/cwltool docker
-	.virtualenv/bin/cwltool \
-		--tmpdir `pwd`/tmp/ \
-		--cachedir `pwd`/cache/ \
-		--outdir `pwd`/results/ \
-		spiel_meerkat16.cwl \
-		jobs/meerkat16.yaml
-
