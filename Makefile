@@ -53,11 +53,15 @@ mesos: .virtualenv-system/bin/cwltoil docker
 slurm: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
 	.virtualenv/bin/toil-cwl-runner \
-		--batchSystem slurm \
-		--mesosMaster slurm.idia.ac.za \
-        --singularity \
-		multi.cwl \
-		jobs/kat7.yaml
+	--batchSystem slurm \
+	--singularity \
+	--cleanWorkDir onSuccess \
+	--logFile $(RUN)/log \
+	--outdir $(RUN)/results \
+	--jobStore file:///$(CURDIR)/$(RUN)/job_store \
+	--workDir $(CURDIR)/work \
+	multi.cwl \
+	jobs/meerkat16.yaml
 
 
 srun: .virtualenv/bin/cwltool
