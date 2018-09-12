@@ -14,7 +14,8 @@ inputs:
  nchan: int
  config: File
  ra: float
- dec: float
+ dec_min: float
+ dec_max: float
  mgain: float
  niter: int
  scale: string
@@ -83,7 +84,8 @@ steps:
       nchan: nchan
       config: config
       ra: ra
-      dec: dec
+      dec_min: dec_min
+      dec_max: dec_max
       mgain: mgain
       niter: niter
       scale: scale

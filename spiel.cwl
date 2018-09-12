@@ -14,7 +14,8 @@ inputs:
  nchan: int
  config: File
  ra: float
- dec: float
+ dec_min: float
+ dec_max: float
  mgain: float
  niter: int
  scale: string
@@ -80,6 +81,8 @@ steps:
   randomize:
     run: steps/randomize.cwl
     in:
+       dec_min: dec_min
+       dec_max: dec_max
        random_seed: random_seed
        dfreq_max: dfreq_max
        dfreq_min: dfreq_min
