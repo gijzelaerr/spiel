@@ -1,6 +1,8 @@
 .PHONY: clean run
 RUN := runs/run_$(shell date +%F-%H-%M-%S)
 
+JOB=jobs/meerkat16_deep2_sphe.yaml
+
 all: run
 
 clean:
@@ -28,7 +30,7 @@ run: .virtualenv/bin/cwltool docker
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
 		spiel.cwl \
-		jobs/meerkat16_deep2.yaml
+		${JOB}
 
 multi: .virtualenv/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -40,7 +42,7 @@ multi: .virtualenv/bin/cwltoil docker
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		jobs/meerkat16_deep2.yaml
+		${JOB}
 
 mesos: .virtualenv-system/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -48,7 +50,7 @@ mesos: .virtualenv-system/bin/cwltoil docker
 		--batchSystem mesos \
 		--mesosMaster stem6.sdp.kat.ac.za:5050 \
 		multi.cwl \
-		jobs/meerkat16.yaml
+		${JOB}
 
 slurm: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
@@ -61,7 +63,7 @@ slurm: .virtualenv/bin/cwltoil
 	--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 	--workDir $(CURDIR)/work \
 	multi.cwl \
-	jobs/meerkat16.yaml
+	${JOB}
 
 
 srun: .virtualenv/bin/cwltool
@@ -72,7 +74,7 @@ srun: .virtualenv/bin/cwltool
 		--cachedir `pwd`/cache/ \
 		--outdir `pwd`/results/ \
 		spiel.cwl \
-		jobs/meerkat16.yaml
+		${JOB}
 
 smulti: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
@@ -85,4 +87,4 @@ smulti: .virtualenv/bin/cwltoil
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
 		--workDir $(CURDIR)/work \
 		multi.cwl \
-		jobs/meerkat16.yaml
+		${JOB}

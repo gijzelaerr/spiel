@@ -1,3 +1,14 @@
+#
+# This is a simulation of th meerkat16 telescope modifed for sphe.
+# It has a bit more variety in the randomimsation of syntesis
+# time and declination compared to meerkat16.yaml
+#
+#
+#
+#
+#
+#
+#
 # Telescope name
 telescope: meerkat
 antennas:

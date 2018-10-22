@@ -67,6 +67,18 @@ inputs:
     inputBinding:
       prefix: -make-psf
 
+  iuwt:
+    type: boolean
+    default: false
+    inputBinding:
+      prefix: -iuwt
+
+  name:
+    type: string
+    default: wsclean
+    inputBinding:
+      prefix: -name
+
 
 arguments:
  - -size
@@ -80,24 +92,24 @@ outputs:
   dirty:
     type: File
     outputBinding:
-      glob: wsclean-dirty.fits
+      glob: $(inputs.name)-dirty.fits
 
   cleaned:
     type: File
     outputBinding:
-      glob: wsclean-image.fits
+      glob: $(inputs.name)-image.fits
 
   model:
     type: File
     outputBinding:
-      glob: wsclean-model.fits
+      glob: $(inputs.name)-model.fits
 
   residual:
     type: File
     outputBinding:
-      glob: wsclean-residual.fits
+      glob: $(inputs.name)-residual.fits
 
   psf:
     type: File
     outputBinding:
-      glob: wsclean-psf.fits
+      glob: $(inputs.name)-psf.fits
