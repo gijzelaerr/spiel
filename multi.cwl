@@ -56,15 +56,6 @@ outputs:
   residual:
     type: File[]
     outputSource: simulate/residual
-  cleaned_iuwt:
-    type: File[]
-    outputSource: simulate/cleaned_iuwt
-  model_iuwt:
-    type: File[]
-    outputSource: simulate/model_iuwt
-  residual_iuwt:
-    type: File[]
-    outputSource: simulate/residual_iuwt
   skymodel:
     type: File[]
     outputSource: simulate/skymodel
@@ -126,4 +117,4 @@ steps:
     scatter: random_seed
 
     out: [skymodel, dirty, cleaned, model, residual, fitsmodel, simulated_vis, psf,
-          settings, bigpsf, model_iuwt, residual_iuwt, cleaned_iuwt]
+          settings, bigpsf]
