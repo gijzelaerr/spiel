@@ -1,7 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-baseCommand: cp
+baseCommand: mv
 
 inputs:
   file:
