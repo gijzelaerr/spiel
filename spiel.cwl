@@ -58,16 +58,6 @@ outputs:
     type: File
     outputSource: rename_model/renamed
 
-  cleaned_iuwt:
-    type: File
-    outputSource: rename_cleaned_iuwt/renamed
-  residual_iuwt:
-    type: File
-    outputSource: rename_residual_iuwt/renamed
-  model_iuwt:
-    type: File
-    outputSource: rename_model_iuwt/renamed
-
   skymodel:
     type: File
     outputSource: rename_skymodel/renamed
@@ -199,29 +189,6 @@ steps:
     out:
       [cleaned, dirty, residual, model, psf]
 
-  wsclean_iuwt:
-    run: steps/wsclean.cwl
-    in:
-      size_x: size_x
-      size_y: size_y
-      scale: scale
-      niter: niter
-      mgain: mgain
-      column: column
-      weight: weight
-      ms: simulator/ms_out
-      make-psf:
-        valueFrom: $(true)
-      auto_mask: auto_mask
-      auto_threshold: auto_threshold
-      iuwt:
-        valueFrom: $(true)
-      name:
-        valueFrom: "iuwt"
-    out:
-      [cleaned, dirty, residual, model, psf]
-
-
   make_bigpsf:
     run: steps/bigpsf.cwl
     in:
@@ -279,36 +246,6 @@ steps:
       prefix: random_seed
     out:
       - renamed
-
-
-
-
-  rename_cleaned_iuwt:
-    run: steps/rename.cwl
-    in:
-      file: wsclean_iuwt/cleaned
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_residual_iuwt:
-    run: steps/rename.cwl
-    in:
-      file: wsclean_iuwt/residual
-      prefix: random_seed
-    out:
-      - renamed
-
-  rename_model_iuwt:
-    run: steps/rename.cwl
-    in:
-      file: wsclean_iuwt/model
-      prefix: random_seed
-    out:
-      - renamed
-
-
-
 
   rename_fitsmodel:
     run: steps/rename.cwl
