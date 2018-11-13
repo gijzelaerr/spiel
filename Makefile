@@ -1,48 +1,42 @@
-.PHONY: clean run
+.PHONY: clean run docker
 RUN := runs/run_$(shell date +%F-%H-%M-%S)
-
+VENV=$(CURDIR)/.virtualenv/
 JOB=jobs/meerkat16_deep2_sphe.yaml
+TOIL=$(VENV)bin/toil-cwl-runner --stats --cleanWorkDir onSuccess \
+		--logFile $(RUN)/log --outdir $(RUN)/results \
+		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
+		--workDir $(CURDIR)/work
+
+CWLTOOL=$(VENV)bin/cwltool --tmpdir $(CRUDIR)/tmp/ --cachedir \
+		$(CURDIR)/cache/ --outdir $(CURDIR)/results/
 
 all: run
 
 clean:
-	rm -rf .virtualenv
+	rm -rf $(VENV)
 
-.virtualenv/:
-	virtualenv -p python2 .virtualenv
+$(VENV):
+	virtualenv -p python2 $(VENV)
  
-.virtualenv-system/:
-	virtualenv --system-site-packages -p python2 .virtualenv-system
-	.virtualenv-system/bin/pip install -r requirements.txt
- 
-.virtualenv/bin/cwltool: .virtualenv/
-	.virtualenv/bin/pip install -r requirements.txt
+$(VENV)bin/cwltool: $(VENV)
+	$(VENV)bin/pip install -r requirements.txt
 
-.virtualenv/bin/cwltoil: .virtualenv/
-	.virtualenv/bin/pip install -r requirements.txt
+$(VENV)bin/cwltoil: $(VENV)
+	$(VENV)bin/pip install -r requirements.txt
 
 docker:
 	docker build -t gijzelaerr/spiel .
 
-run: .virtualenv/bin/cwltool docker
-	.virtualenv/bin/cwltool \
-		--tmpdir `pwd`/tmp/ \
-		--cachedir `pwd`/cache/ \
-		--outdir `pwd`/results/ \
-		spiel.cwl \
-		${JOB}
+run: $(VENV)bin/cwltool docker
+	$(CWLTOOL) spiel.cwl ${JOB}
 
-multi: .virtualenv/bin/cwltoil docker
+multi: $(VENV)bin/cwltoil docker
 	mkdir -p $(RUN)/results
-	.virtualenv/bin/toil-cwl-runner \
-		--stats \
-	    --cleanWorkDir onSuccess \
-		--logFile $(RUN)/log \
-		--outdir $(RUN)/results \
-		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-		--workDir $(CURDIR)/work \
-		multi.cwl \
-		${JOB}
+	$(TOIL) multi.cwl ${JOB}
+
+multi-psf: .virtualenv/bin/cwltoil
+	mkdir -p $(RUN)/results
+	$(TOIL) multi-psf.cwl ${JOB}
 
 mesos: .virtualenv-system/bin/cwltoil docker
 	mkdir -p $(RUN)/results
@@ -54,37 +48,12 @@ mesos: .virtualenv-system/bin/cwltoil docker
 
 slurm: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
-	.virtualenv/bin/toil-cwl-runner \
-	--batchSystem slurm \
-	--singularity \
-	--cleanWorkDir onSuccess \
-	--logFile $(RUN)/log \
-	--outdir $(RUN)/results \
-	--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-	--workDir $(CURDIR)/work \
-	multi.cwl \
-	${JOB}
+	$(TOIL) --batchSystem slurm --singularity multi.cwl ${JOB}
 
 
 srun: .virtualenv/bin/cwltool
-	.virtualenv/bin/cwltool \
-		--debug \
-        --singularity \
-		--tmpdir `pwd`/tmp/ \
-		--cachedir `pwd`/cache/ \
-		--outdir `pwd`/results/ \
-		spiel.cwl \
-		${JOB}
+	$(CWLTOOL) --singularity spiel.cwl $(JOB)
 
 smulti: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
-	.virtualenv/bin/toil-cwl-runner \
-		--stats \
-        --singularity \
-	    --cleanWorkDir onSuccess \
-		--logFile $(RUN)/log \
-		--outdir $(RUN)/results \
-		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-		--workDir $(CURDIR)/work \
-		multi.cwl \
-		${JOB}
+	$(TOIL) --singularity multi.cwl $(JOB)
