@@ -15,25 +15,38 @@ arguments:
   - prefix: -c
     valueFrom: |
 
-      from numpy import random
+      from numpy import random, sqrt
 
       true = True  # javascript booleans are all lowercase
       false = False
 
-      ra = $( inputs.ra )
-      dec = $( inputs.dec )
-      seed = $( inputs.seed )
-      fov = $( inputs.fov ) 
-      nsrc = $( inputs.nsrc )
-      pb_fwhm = $( inputs.pb_fwhm )
-      freq0 = $( inputs.freq0 )
-      flux_scale = $( inputs.flux_scale )
+      ra = $(inputs.ra)
+      dec = $(inputs.dec)
+      seed = $(inputs.seed)
+      fov = $(inputs.fov) 
+      nsrc = $(inputs.nsrc)
+      pb_fwhm = $(inputs.pb_fwhm)
+      freq0 = $(inputs.freq0)
+      flux_scale = $(inputs.flux_scale)
+      sefd = $(inputs.sefd)
+      dtime = $(inputs.dtime)
+      dfreq = $(inputs.dfreq)
+      nant = $(inputs.nant)
 
-      noise = $( inputs.sefd / Math.sqrt( 2 * inputs.dtime * inputs.dfreq * (inputs.nant * (inputs.nant-1))/2) )
+      Srms = sefd / sqrt( 2 * dtime * dfreq * (nant * (nant-1))/2)
+
+      # Landman: you might need to divide by a factor of 2 in image space
+      # because the noise on visibilities is complex valued
+      noise = sqrt(Srms*2)
+      print("estimated noise level is: {}".format(noise))
 
       random.seed(seed)
 
-      fluxes = (random.pareto(5, nsrc) * flux_scale) + noise/10
+      # pareto value 8 gives max values around 1
+      fluxes = random.pareto(8, nsrc) * noise * flux_scale
+
+      print(flux_scale)
+      print(fluxes)
 
       if pb_fwhm:
       # Simulate more sources in the primary beam FWHM

@@ -54,7 +54,7 @@ arguments:
       synthesis = random.uniform($(inputs.synthesis_min), $(inputs.synthesis_max))
       dfreq = int(random.uniform($(inputs.dfreq_min), $(inputs.dfreq_max)))
 
-      flux_scale = 10**random.uniform($(inputs.flux_scale_min), $(inputs.flux_scale_max))
+      flux_scale = random.uniform($(inputs.flux_scale_min), $(inputs.flux_scale_max))
 
       print(json.dumps({
         'dec': dec,
