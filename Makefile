@@ -1,7 +1,7 @@
 .PHONY: clean run docker
 RUN := runs/run_$(shell date +%F-%H-%M-%S)
 VENV=$(CURDIR)/.virtualenv/
-JOB=jobs/meerkat16_deep2_sphe.yaml
+JOB=jobs/meerkat16_oleg_flux10.yaml
 TOIL=$(VENV)bin/toil-cwl-runner --stats --cleanWorkDir onSuccess \
 		--logFile $(RUN)/log --outdir $(RUN)/results \
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
@@ -12,17 +12,16 @@ CWLTOOL=$(VENV)bin/cwltool --tmpdir $(CRUDIR)/tmp/ --cachedir \
 
 all: run
 
-clean:
-	rm -rf $(VENV)
-
 $(VENV):
 	virtualenv -p python2 $(VENV)
  
 $(VENV)bin/cwltool: $(VENV)
 	$(VENV)bin/pip install -r requirements.txt
+	touch $(VENV)bin/cwltool
 
 $(VENV)bin/cwltoil: $(VENV)
 	$(VENV)bin/pip install -r requirements.txt
+	touch $(VENV)bin/cwltoil
 
 docker:
 	docker build -t gijzelaerr/spiel .
@@ -57,3 +56,6 @@ srun: .virtualenv/bin/cwltool
 smulti: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
 	$(TOIL) --singularity multi.cwl $(JOB)
+
+clean:
+	rm -rf runs/* cache/* results/*
