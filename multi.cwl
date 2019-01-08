@@ -98,7 +98,6 @@ steps:
       weight: weight
       randomise_pos: randomise_pos
       sefd: sefd
-      dtime: dtime
       auto_mask: auto_mask
       auto_threshold: auto_threshold
       nant: nant
