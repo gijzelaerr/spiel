@@ -60,3 +60,11 @@ smulti: .virtualenv/bin/cwltoil
 
 clean:
 	rm -rf runs/* cache/* results/*
+
+cirrus: $(VENV)bin/cwltoil
+	mkdir -p $(RUN)/results
+	TMPDIR=$(CURDIR)/tmp SINGULARITY_CACHEDIR=$(HOME)/singularity_images TOIL_TORQUE_ARGS="-A sc004" $(TOIL) --batchSystem Torque --singularity multi.cwl ${JOB}
+
+cirrus-onenode: $(VENV)bin/cwltoil
+	mkdir -p $(RUN)/results
+	SINGULARITY_CACHEDIR=$(HOME)/singularity_images qsub -A sc004 -lselect=1:ncpus=36 -l place=scatter:excl -lwalltime=8:00:00 -- $(TOIL) --singularity spiel.cwl $(JOB)
