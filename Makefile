@@ -1,11 +1,12 @@
 .PHONY: clean run docker
 RUN := runs/run_$(shell date +%F-%H-%M-%S)
 VENV=$(CURDIR)/.virtualenv/
-JOB=jobs/meerkat16_oleg_512.yaml
-TOIL=$(VENV)bin/toil-cwl-runner --stats --cleanWorkDir onSuccess \
+JOB=jobs/meerkat16_oleg_flux100.yaml
+TOIL=$(VENV)bin/toil-cwl-runner --cleanWorkDir always \
 		--logFile $(RUN)/log --outdir $(RUN)/results \
 		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-		--workDir $(CURDIR)/work --tmpdir-prefix=$(CURDIR)/tmp 
+		--workDir $(CURDIR)/work --tmpdir-prefix=$(CURDIR)/tmp \
+		--tmp-outdir-prefix=$(CURDIR)/tmp --clean always
 
 CWLTOOL=$(VENV)bin/cwltool --tmpdir $(CRUDIR)/tmp/ --cachedir \
 		$(CURDIR)/cache/ --outdir $(CURDIR)/results/
@@ -31,7 +32,7 @@ run: $(VENV)bin/cwltool docker
 
 multi: $(VENV)bin/cwltoil docker
 	mkdir -p $(RUN)/results
-	$(TOIL) multi.cwl ${JOB}
+	TMPDIR=$(CURDIR)/tmp $(TOIL) multi.cwl ${JOB}
 
 multi-psf: .virtualenv/bin/cwltoil
 	mkdir -p $(RUN)/results
