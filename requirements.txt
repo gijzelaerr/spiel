@@ -1,2 +1,2 @@
-toil[all]
+cwltool
 

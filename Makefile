@@ -27,12 +27,12 @@ docker:
 	docker build -t gijzelaerr/spiel .
 
 
-run: $(VENV)bin/cwltool docker
-	$(CWLTOOL) spiel.cwl ${JOB}
+run: $(VENV)bin/cwltool
+	$(CWLTOOL) spiel.cwl $(JOB)
 
 
-multi: $(VENV)bincwltool docker
-	$(CWLTOOL) multiple.cwl ${JOB}
+multiple: $(VENV)bincwltool
+	$(CWLTOOL) multiple.cwl $(JOB)
 
 
 clean:

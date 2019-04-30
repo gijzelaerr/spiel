@@ -112,5 +112,14 @@ steps:
 
     scatter: random_seed
 
-    out: [skymodel, dirty, cleaned, model, residual, fitsmodel, simulated_vis, psf,
-          settings, bigpsf]
+    out:
+      - skymodel
+      - dirty
+      - cleaned
+      - model
+      - residual
+      - fitsmodel
+      - simulated_vis
+      - psf
+      - settings
+      - bigpsf
