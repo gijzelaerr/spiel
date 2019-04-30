@@ -1,0 +1,59 @@
+# Telescope name
+telescope: meerkat
+antennas:
+  class: Directory
+  path: data/MeerKAT16_ANTENNAS
+
+# number of antennas, 7 for KAT-7, typically 64 for Meerkat
+nant: 16
+
+# Synthesis time of observation
+synthesis_min: 7.5  # hours
+synthesis_max: 8
+
+# Integration time in seconds
+dtime: 10
+
+# Start frequency of observation
+freq0: 1049833007.8125
+
+# Channel width
+dfreq_min: 200e6
+dfreq_max: 300e6
+
+# Number of channels
+nchan: 1
+
+flux_scale_min: 100
+flux_scale_max: 100
+
+# simulation properties
+config:
+  class: File
+  path: ../data/tdlconf.profiles
+ra: 63.36
+dec_min: -55
+dec_max: -65
+nsrc: 100
+fov: 1
+pb_fwhm: 0.25  # number of sources in the primary beam
+randomise_pos: true
+gain_errors: 0 # 1|0
+gainamp_min_error: 1 # no gain error is 1.0
+gainamp_max_error: 1 # no gain error is 1.0
+gainphase_min_error: 2 # in degrees
+gainphase_max_error: 10 # in degrees
+# Imaging params
+size_x: 256
+size_y: 256
+scale: 1.6asec
+niter: 100000000
+mgain: 1.0
+column: DATA
+weight: uniform
+sefd: 520
+auto_mask: 5
+auto_threshold: 0.125
+
+random_seed: 2
+random_seeds: [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010]

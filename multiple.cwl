@@ -68,9 +68,6 @@ outputs:
   settings:
     type: File[]
     outputSource: simulate/settings
-  bigpsf:
-    type: File[]
-    outputSource: simulate/bigpsf
 
 steps:
   simulate:

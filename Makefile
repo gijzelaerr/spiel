@@ -1,70 +1,39 @@
 .PHONY: clean run docker
-RUN := runs/run_$(shell date +%F-%H-%M-%S)
-VENV=$(CURDIR)/.virtualenv/
-JOB=jobs/meerkat16_oleg_flux100.yaml
-TOIL=$(VENV)bin/toil-cwl-runner --cleanWorkDir always \
-		--logFile $(RUN)/log --outdir $(RUN)/results \
-		--jobStore file:///$(CURDIR)/$(RUN)/job_store \
-		--workDir $(CURDIR)/work --tmpdir-prefix=$(CURDIR)/tmp \
-		--tmp-outdir-prefix=$(CURDIR)/tmp --clean always
 
-CWLTOOL=$(VENV)bin/cwltool --tmpdir $(CRUDIR)/tmp/ --cachedir \
-		$(CURDIR)/cache/ --outdir $(CURDIR)/results/
+RUN := runs/run_$(shell date +%F-%H-%M-%S)
+
+VENV=$(CURDIR)/.virtualenv/
+
+JOB=job.yaml
+
+CWLTOOL=$(VENV)bin/cwltool \
+	--tmpdir $(CRUDIR)/tmp/ \
+	--cachedir $(CURDIR)/cache/ \
+	--outdir $(CURDIR)/results/
 
 all: run
 
+
 $(VENV):
-	virtualenv -p python2 $(VENV)
- 
+	python3 -m venv $(VENV)
+
+
 $(VENV)bin/cwltool: $(VENV)
 	$(VENV)bin/pip install -r requirements.txt
 	touch $(VENV)bin/cwltool
 
-$(VENV)bin/cwltoil: $(VENV)
-	$(VENV)bin/pip install -r requirements.txt
-	touch $(VENV)bin/cwltoil
 
 docker:
 	docker build -t gijzelaerr/spiel .
 
+
 run: $(VENV)bin/cwltool docker
 	$(CWLTOOL) spiel.cwl ${JOB}
 
-multi: $(VENV)bin/cwltoil docker
-	mkdir -p $(RUN)/results
-	TMPDIR=$(CURDIR)/tmp $(TOIL) multi.cwl ${JOB}
 
-multi-psf: .virtualenv/bin/cwltoil
-	mkdir -p $(RUN)/results
-	$(TOIL) multi-psf.cwl ${JOB}
+multi: $(VENV)bincwltool docker
+	$(CWLTOOL) multiple.cwl ${JOB}
 
-mesos: .virtualenv-system/bin/cwltoil docker
-	mkdir -p $(RUN)/results
-	.virtualenv/bin/toil-cwl-runner \
-		--batchSystem mesos \
-		--mesosMaster stem6.sdp.kat.ac.za:5050 \
-		multi.cwl \
-		${JOB}
-
-slurm: .virtualenv/bin/cwltoil
-	mkdir -p $(RUN)/results
-	$(TOIL) --batchSystem slurm --singularity multi.cwl ${JOB}
-
-
-srun: .virtualenv/bin/cwltool
-	$(CWLTOOL) --singularity spiel.cwl $(JOB)
-
-smulti: .virtualenv/bin/cwltoil
-	mkdir -p $(RUN)/results
-	$(TOIL) --singularity multi.cwl $(JOB)
 
 clean:
-	rm -rf runs/* cache/* results/*
-
-cirrus: $(VENV)bin/cwltoil
-	mkdir -p $(RUN)/results
-	TMPDIR=$(CURDIR)/tmp SINGULARITY_CACHEDIR=$(HOME)/singularity_images TOIL_TORQUE_ARGS="-A sc004" $(TOIL) --batchSystem Torque --singularity multi.cwl ${JOB}
-
-cirrus-onenode: $(VENV)bin/cwltoil
-	mkdir -p $(RUN)/results
-	SINGULARITY_CACHEDIR=$(HOME)/singularity_images qsub -A sc004 -lselect=1:ncpus=36 -l place=scatter:excl -lwalltime=8:00:00 -- $(TOIL) --singularity spiel.cwl $(JOB)
+	rm -rf runs/* cache/* results/* tmp/*
