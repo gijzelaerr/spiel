@@ -31,7 +31,7 @@ run: $(VENV)bin/cwltool
 	$(CWLTOOL) spiel.cwl $(JOB)
 
 
-multiple: $(VENV)bincwltool
+multiple: $(VENV)bin/cwltool
 	$(CWLTOOL) multiple.cwl $(JOB)
 
 

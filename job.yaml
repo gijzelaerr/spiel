@@ -30,7 +30,7 @@ flux_scale_max: 100
 # simulation properties
 config:
   class: File
-  path: ../data/tdlconf.profiles
+  path: data/tdlconf.profiles
 ra: 63.36
 dec_min: -55
 dec_max: -65
@@ -56,4 +56,4 @@ auto_mask: 5
 auto_threshold: 0.125
 
 random_seed: 2
-random_seeds: [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010]
+random_seeds: [1000, 1001, 1002, 1003]

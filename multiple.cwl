@@ -122,4 +122,3 @@ steps:
       - simulated_vis
       - psf
       - settings
-      - bigpsf
