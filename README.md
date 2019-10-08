@@ -4,6 +4,9 @@ CWL version based on the simulation example from Stimela.
 
 https://github.com/SpheMakh/Stimela/blob/master/examples/simulation_pipeline.py
 
+I use this pipeline to generate datasets for trainig neural networks. 
+
+This repository is a bit empty and undocumentated, sorry about that. Maybe in the future i find more time to enhance it. For now you can use it as inspiration for building CWL pipelines.
 
 # requirements
 
@@ -13,7 +16,7 @@ https://github.com/SpheMakh/Stimela/blob/master/examples/simulation_pipeline.py
 * Ubuntu 16.04 with [KERN-3](http://kernsuite.info) repository enabled if you
   dont want to use containers
 
-Example the Makefile, it is an example on how to run our pipeline.
+Examples on how to run the pipeline are in` Makefile`.
 
 To run the pipeline with the example dataset just run:
 ```bash
@@ -25,5 +28,5 @@ If you want to try out toil run:
 $ make multi
 ```
 
-[![spiel graph](https://github.com/gijzelaerr/spiel/blob/master/spiel.png?raw=true "spiel graph")
+![spiel graph](https://github.com/gijzelaerr/spiel/blob/master/spiel.png?raw=true "spiel graph")
 
